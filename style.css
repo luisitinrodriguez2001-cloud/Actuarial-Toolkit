@@ -60,6 +60,7 @@ input[type="checkbox"]{ min-width:44px; }
 .chart + .chart{margin-top:1rem}
 .inline{display:flex;align-items:center;gap:.5rem}
 .disclaimer{font-size:.85rem;opacity:.8}
+.what-btn{font-size:.85rem;color:rgb(59,130,246);text-decoration:underline;background:none;border:none;padding:0;cursor:pointer}
 #assumptionsModal{max-width:min(760px,90vw)}
 .assumptions-body{max-height:70vh;overflow:auto}
 .contrib .chip{display:inline-block;margin:.125rem .25rem;padding:.25rem .5rem;border-radius:999px;background:var(--chip,#f1f1f1);font-size:.85rem}
