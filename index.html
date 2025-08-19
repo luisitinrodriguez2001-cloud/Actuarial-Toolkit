@@ -59,7 +59,155 @@
     <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-emerald-200 to-sky-200 blur-3xl opacity-60 animate-floaty" style="animation-delay: -2.2s;"></div>
   </div>
 
-  <main id="root" class="relative"></main>
+  <main class="relative">
+    <div id="root"></div>
+
+    <section id="longevity-lab" class="card" aria-labelledby="longevity-title">
+      <h2 id="longevity-title">Counterfactual Longevity Lab</h2>
+
+      <!-- Global disclaimer banner -->
+      <p class="disclaimer" role="note">
+        Population-level estimates only. Uses U.S. period life table + published hazard ratio associations.
+        Not medical advice. Results are sensitive to assumptions. See “Assumptions &amp; Data Sources.”
+      </p>
+
+      <!-- Controls + Summary -->
+      <div class="grid two-col" id="controls">
+        <div>
+          <fieldset aria-describedby="disclaimer-controls">
+            <legend>Profile</legend>
+            <label>Age
+              <input id="age" type="number" min="20" max="100" inputmode="numeric" placeholder="35" />
+            </label>
+            <label>Sex
+              <select id="sex">
+                <option value="F">Female</option>
+                <option value="M">Male</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Behaviors</legend>
+
+            <label>Smoking
+              <select id="smoking">
+                <option value="never">Never</option>
+                <option value="current">Current</option>
+                <option value="former">Former</option>
+              </select>
+            </label>
+            <label id="ysq-wrap" class="inline" hidden>
+              Years since quit
+              <input id="yearsSinceQuit" type="number" min="0" max="60" placeholder="5" />
+            </label>
+
+            <label>Physical activity (MET-hours/week)
+              <input id="metHours" type="number" min="0" max="100" step="0.5" placeholder="10" />
+            </label>
+
+            <label>Weight (lbs)
+              <input id="weight" type="number" min="50" max="1000" step="0.1" placeholder="160" />
+            </label>
+
+            <label class="inline">Height
+              <input id="heightFeet" type="number" min="3" max="8" step="1" placeholder="5" aria-label="Height feet" />
+              ft
+              <input id="heightInches" type="number" min="0" max="11" step="1" placeholder="9" aria-label="Height inches" />
+              in
+            </label>
+
+            <label>Alcohol (drinks/day)
+              <input id="alcohol" type="number" min="0" max="10" step="0.1" placeholder="0" />
+            </label>
+
+            <small class="disclaimer">
+              Associations, not causation. Hazard ratios drawn from large cohort/meta analyses; simplifications apply.
+            </small>
+          </fieldset>
+
+          <fieldset id="screening_fs">
+            <legend>Preventive screening</legend>
+            <label id="crc_wrap" hidden><input type="checkbox" id="crc_screen" /> Colorectal: guideline schedule (45–75)</label>
+            <label id="breast_wrap" hidden><input type="checkbox" id="breast_screen" /> Breast: biennial from 40–74</label>
+            <small class="disclaimer">Modeled as additive life-years/QALYs from published decision analyses.</small>
+          </fieldset>
+
+          <label class="inline">
+            <input id="qualityToggle" type="checkbox" />
+            Show quality-adjusted years (HALE/QALYs)
+          </label>
+
+          <div class="actions">
+            <button id="runBtn" class="primary">Recalculate</button>
+            <button id="assumptionsBtn" type="button">Assumptions &amp; Data Sources</button>
+          </div>
+          <small id="disclaimer-controls" class="disclaimer">
+            This tool uses a period life table (mortality held constant at observed year), proportional-hazards scaling,
+            and screening deltas from external models. It is not personalized medical guidance.
+          </small>
+        </div>
+
+        <!-- Results summary -->
+        <div id="summary" aria-live="polite">
+          <div class="stat">
+            <div class="stat-label">Remaining life expectancy</div>
+            <div class="stat-value">
+              <span id="le_baseline">–</span> → <span id="le_adjusted">–</span>
+            </div>
+            <div class="stat-delta"><span id="le_delta">+0.0</span> years</div>
+          </div>
+
+          <div class="stat" id="hale-row" hidden>
+            <div class="stat-label">Healthy life expectancy</div>
+            <div class="stat-value">
+              <span id="hale_baseline">–</span> → <span id="hale_adjusted">–</span>
+            </div>
+            <div class="stat-delta"><span id="hale_delta">+0.0</span> years</div>
+          </div>
+
+          <div id="contrib" class="contrib"></div>
+
+          <div class="actions">
+            <button id="downloadCsv" type="button">Download CSV</button>
+            <button id="shareState" type="button">Share</button>
+          </div>
+
+          <small class="disclaimer">
+            CSV includes this disclaimer and method summary in its header rows. Interpret with caution.
+          </small>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="chart" id="survivalChart" aria-label="Survival curves baseline vs adjusted"></div>
+      <div class="chart" id="cdfChart" aria-label="Cumulative probability of death by age"></div>
+
+      <!-- Assumptions Drawer -->
+      <dialog id="assumptionsModal" aria-labelledby="assumptionsTitle">
+        <h3 id="assumptionsTitle">Assumptions &amp; Data Sources</h3>
+        <div id="assumptionsBody" class="assumptions-body">
+          <p><strong>Method:</strong> Period U.S. life table → annual hazards; apply behavior hazard ratios multiplicatively
+          (proportional hazards). Preventive screenings added as life-years/QALYs from published models. HALE via Sullivan method:
+          person-years weighted by “healthy” prevalence.</p>
+
+          <p><strong>Data files used in this app (static JSON):</strong></p>
+          <ul>
+            <li><code>data/lifetable_US_2022.json</code> — Period life table (qx by age/sex), adapted from U.S. NCHS 2022 life table.</li>
+            <li><code>data/hr_physical_activity.json</code> — Relative risks by MET-hours/week bins from pooled cohort analysis.</li>
+            <li><code>data/hr_bmi.json</code> — BMI category hazard ratios (never-smokers reference ≈ 22.5–&lt;25).</li>
+            <li><code>data/hr_smoking.json</code> — Current smoker HR and former-smoker HR decay by years-since-quit.</li>
+            <li><code>data/hr_alcohol.json</code> — Dose-response HR vs drinks/day, conservative (no protective effect).</li>
+            <li><code>data/screening_crc.json</code>, <code>data/screening_breast.json</code> — Life-years/QALYs gained per 1,000 screened.</li>
+            <li><code>data/hale_weights.json</code> — Age-specific “healthy” prevalence for Sullivan HALE.</li>
+          </ul>
+          <p><strong>Limits &amp; Disclaimers:</strong> Associations ≠ causation; population averages; no comorbidity interactions; period table
+          holds future mortality trends fixed; screening deltas are model-based and simplified to per-person averages. Not medical advice.</p>
+          <button id="closeAssumptions" class="secondary">Close</button>
+        </div>
+      </dialog>
+    </section>
+  </main>
 
   <noscript>
     <div class="max-w-xl mx-auto mt-12 p-4 rounded-xl bg-white/80 border">
@@ -81,6 +229,7 @@
 <!-- partial -->
   <script src='https://unpkg.com/react@18/umd/react.development.js'></script>
 <script src='https://unpkg.com/react-dom@18/umd/react-dom.development.js'></script><script  src="./script.js"></script>
+<script type="module" src="js/app.js"></script>
 
 </body>
 </html>

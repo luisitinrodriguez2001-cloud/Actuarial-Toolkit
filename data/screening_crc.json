@@ -1,0 +1,5 @@
+{
+  "default_schedule": { "startAge": 45, "stopAge": 75, "modality": "mixed" },
+  "LYG_per_1000": 260,
+  "QALY_per_1000": 210
+}
