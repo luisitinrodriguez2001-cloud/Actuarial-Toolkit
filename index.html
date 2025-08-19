@@ -29,25 +29,43 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased">
-  <header class="toolbar">
-    <span class="logo" role="img" aria-label="smile">😊</span>
-    <nav class="social">
-      <a href="https://github.com/luisitinrodriguez2001-cloud" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
-      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-    </nav>
-    <div class="tool-picker">
+  <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-gradient-to-br from-amber-200 to-pink-200 blur-3xl opacity-60 animate-floaty"></div>
+    <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-emerald-200 to-sky-200 blur-3xl opacity-60 animate-floaty" style="animation-delay:-2.2s;"></div>
+  </div>
+  <header class="max-w-5xl mx-auto px-4 py-6 bg-white/80 backdrop-blur border border-slate-200 rounded-xl shadow">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4 animate-fadeUp">
+      <div class="w-16 h-16 rounded-2xl bg-yellow-100 flex items-center justify-center text-3xl shadow bouncy select-none" aria-hidden="true" title="Hi!">🙂</div>
+      <div class="flex-1 min-w-0">
+        <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Actuarial Toolkit</h1>
+        <p class="text-slate-600">Crunch the numbers and outwit risk.</p>
+      </div>
+      <nav class="flex items-center gap-4 text-sm" aria-label="Social">
+        <a class="inline-flex items-center gap-1 underline" href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
+        <span class="text-slate-400">&bull;</span>
+        <a class="inline-flex items-center gap-1 underline" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      </nav>
+    </div>
+    <div class="mt-3 flex items-center justify-between text-sm text-slate-600 border border-slate-200 rounded-lg bg-white/80 px-3 py-2 shadow">
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-slate-100">Fun fact</span>
+        <span id="fun-fact" class="animate-fadeUp text-slate-600"></span>
+      </div>
+      <button id="shuffle-fact" class="icon-btn hover:bg-slate-100" aria-label="Shuffle fun fact" title="Shuffle fun fact">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor">
+          <path d="M7 3v2h.59L5 8.59 6.41 10 10 6.41V7h2V3H7zm10 0h4v4h-2V6.41l-3.29 3.3-1.42-1.42L17.59 5H17V3zM3 13h4v-2H3v2zm6.71 3.29 1.42 1.42L5 23h2v-2h.59l3.3-3.29-1.18-1.42zM19 14h2v4h-4v-2h1.59l-3.29-3.29 1.42-1.42L19 14.59V14z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="max-w-5xl mx-auto px-4 mb-4">
+    <div class="flex items-center gap-2">
       <label for="toolSelect">Pick a tool:</label>
       <select id="toolSelect" class="field">
         <option value="longevity-lab" selected>Longevity Lab</option>
       </select>
     </div>
-  </header>
-  <div id="fun-fact" class="fun-fact"></div>
-
-  <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
-    <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-gradient-to-br from-amber-200 to-pink-200 blur-3xl opacity-60 animate-floaty"></div>
-    <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-emerald-200 to-sky-200 blur-3xl opacity-60 animate-floaty" style="animation-delay:-2.2s;"></div>
   </div>
 
   <main class="relative">
