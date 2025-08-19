@@ -13,15 +13,26 @@ import { setState, getState } from './state.js';
     const s = getState();
     document.getElementById('ysq-wrap').hidden = (s.smoking!=='former');
 
-    // fun facts ribbon
+    // fun facts
     const facts = [
       'Honey never spoils.',
       'A group of flamingos is called a flamboyance.',
       'Bananas are berries, but strawberries are not.'
     ];
     const ff = document.getElementById('fun-fact');
-    if (ff) {
-      ff.textContent = facts[Math.floor(Math.random()*facts.length)];
+    const shuffle = document.getElementById('shuffle-fact');
+    if (ff && facts.length) {
+      let idx = Math.floor(Math.random() * facts.length);
+      ff.textContent = facts[idx];
+      if (shuffle) {
+        shuffle.addEventListener('click', () => {
+          idx = (idx + 1) % facts.length;
+          ff.textContent = facts[idx];
+        });
+      }
+    } else if (ff) {
+      ff.textContent = 'No facts yet.';
+      if (shuffle) shuffle.disabled = true;
     }
 
     // simple tool picker
