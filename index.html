@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Fitness-Toolkit</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14'>😊</text></svg>">
   <link rel="stylesheet" href="./style.css">
 
 </head>
@@ -53,6 +54,22 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased">
+  <header class="toolbar">
+    <span class="logo" role="img" aria-label="smile">😊</span>
+    <nav class="social">
+      <a href="https://github.com/luisitinrodriguez2001-cloud" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+    <div class="tool-picker">
+      <label for="toolSelect">Pick a tool:</label>
+      <select id="toolSelect" class="field">
+        <option value="longevity-lab" selected>Longevity Lab</option>
+      </select>
+    </div>
+  </header>
+  <div id="fun-fact" class="fun-fact"></div>
+
   <!-- Ambient background blobs (pure CSS, subtle motion) -->
   <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
     <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-gradient-to-br from-amber-200 to-pink-200 blur-3xl opacity-60 animate-floaty"></div>
@@ -62,7 +79,7 @@
   <main class="relative">
     <div id="root"></div>
 
-    <section id="longevity-lab" class="card" aria-labelledby="longevity-title">
+    <section id="longevity-lab" class="card tool" aria-labelledby="longevity-title">
       <h2 id="longevity-title">Counterfactual Longevity Lab</h2>
 
       <!-- Global disclaimer banner -->
