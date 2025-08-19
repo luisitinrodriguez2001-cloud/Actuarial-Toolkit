@@ -192,6 +192,48 @@ button[type="button"], .card button, .card .kbd {
 }
 button[type="button"]:active { transform: translateY(1px); }
 
+/* Primary and secondary buttons */
+.primary,
+.secondary {
+  padding: .6rem 1.1rem;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color .2s var(--ease-out), box-shadow .2s var(--ease-out), transform .06s var(--ease-out);
+}
+
+.primary {
+  background-color: rgb(59, 130, 246);
+  color: white;
+  border: none;
+}
+
+.primary:hover {
+  background-color: rgb(37, 99, 235);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, .08);
+}
+
+.primary:active {
+  background-color: rgb(29, 78, 216);
+  transform: translateY(1px);
+}
+
+.secondary {
+  background-color: white;
+  color: rgb(15, 23, 42);
+  border: 1px solid rgba(15, 23, 42, .12);
+}
+
+.secondary:hover {
+  background-color: rgb(241, 245, 249);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, .08);
+}
+
+.secondary:active {
+  background-color: rgb(226, 232, 240);
+  transform: translateY(1px);
+}
+
 /* --- Bouncy profile icon --- */
 @keyframes bobble {
   0%, 100% { transform: translateY(0) rotate(0deg); }
