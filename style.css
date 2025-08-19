@@ -5,6 +5,13 @@
 select, input[type="checkbox"]{ min-height:44px; }
 input[type="checkbox"]{ min-width:44px; }
 
+#qualityToggle{
+  min-width:16px;
+  min-height:16px;
+  width:16px;
+  height:16px;
+}
+
 /* Show tooltips on focus */
 .icon-btn[data-open] .tooltip{
   pointer-events:auto;
@@ -58,6 +65,7 @@ input[type="checkbox"]{ min-width:44px; }
 .stat-delta{color:var(--accent,#1a7f37)}
 .chart{height:280px;margin-bottom:1rem}
 .chart + .chart{margin-top:1rem}
+.graph-divider{border-top:2px solid #e5e7eb;margin:1.5rem 0}
 .inline{display:flex;align-items:center;gap:.5rem}
 .disclaimer{font-size:.85rem;opacity:.8}
 .what-btn{font-size:.85rem;color:rgb(59,130,246);text-decoration:underline;background:none;border:none;padding:0;cursor:pointer}

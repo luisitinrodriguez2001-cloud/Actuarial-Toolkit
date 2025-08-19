@@ -72,9 +72,8 @@ function wireUI() {
   document.getElementById('assumptionsBtn').addEventListener('click', ()=> dlg.showModal());
   document.getElementById('closeAssumptions').addEventListener('click', ()=> dlg.close());
 
-  // Export/Share
+  // Export
   document.getElementById('downloadCsv').addEventListener('click', downloadCsv);
-  document.getElementById('shareState').addEventListener('click', shareURL);
 
   // react to state changes
   onStateChange(() => {
@@ -192,13 +191,6 @@ function downloadCsv(){
     worker.onmessage = onWorkerMessage;
   };
   run();
-}
-
-function shareURL(){
-  const url = new URL(location.href);
-  url.searchParams.set('s', btoa(encodeURIComponent(JSON.stringify(getState()))));
-  navigator.clipboard?.writeText(url.toString());
-  alert('Sharable link copied. Reminder: results are population-level; see Assumptions for details.');
 }
 
 function q(sel){ return document.querySelector(sel); }
