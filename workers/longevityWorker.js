@@ -2,7 +2,7 @@
 // DISCLAIMER: This model uses period life tables and literature HRs; it is simplified and does not capture interactions.
 // Not medical advice. Results are sensitive to assumptions.
 
-importScripts; // no-op hint for bundlers
+// importScripts; // no-op hint for bundlers (kept for bundlers, safe if undefined)
 
 let life, hrAct, hrBmi, hrSmoke, hrAlc, haleWeights, screening_crc, screening_breast;
 
@@ -30,8 +30,9 @@ self.onmessage = (e)=>{
 function runModel(st){
   const ages = range(0,111);
   // Life table qx for sex; fall back to synthetic Gompertz if missing.
-  const qx = life?.[st.sex]?.qx || syntheticQx(st.sex);
-  const muBase = ages.map(a => -Math.log(1 - (qx[a] ?? qx[110])));
+  const qxRaw = life?.[st.sex]?.qx || syntheticQx(st.sex);
+  const qx = fillQxGaps(qxRaw);
+  const muBase = ages.map(a => -Math.log(1 - qx[a]));
   // HRs (age-invariant scalars in this MVP)
   const HR = hrSmoking(st.smoking) * hrActivity(st.metHours, hrAct) * hrBmiFn(st.bmi, hrBmi) * hrAlcohol(st.alcoholDrinks, hrAlc);
 
@@ -132,6 +133,16 @@ function screeningYearsGain(age, sex, flags){
 }
 
 // --- Life table math ---
+function fillQxGaps(qx){
+  const out = {};
+  let last = qx[0] ?? 0;
+  for(let a=0;a<=110;a++){
+    if(qx[a]!=null) last = qx[a];
+    out[a] = last;
+  }
+  return out;
+}
+
 function lifeTableFromQx(qx){
   const ages = Object.keys(qx).map(k=>+k).sort((a,b)=>a-b);
   const maxA = ages[ages.length-1];
