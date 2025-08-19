@@ -30,7 +30,7 @@ export function drawLines(containerId, series, opts={}){
   // axes
   line(m.l,H-m.b,W-m.r,H-m.b, '#aaa'); // x
   line(m.l,m.t,m.l,H-m.b, '#aaa');     // y
-  text(W-m.r, H-m.b+30, opts.xLabel||'', 'end');
+  text(W-m.r, H-m.b+40, opts.xLabel||'', 'end');
 
   // ticks (simple)
   for (let a = Math.ceil(xMin/10)*10; a<=xMax; a+=10){
