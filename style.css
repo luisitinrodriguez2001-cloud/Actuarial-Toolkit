@@ -65,24 +65,3 @@ input[type="checkbox"]{ min-width:44px; }
 .assumptions-body{max-height:70vh;overflow:auto}
 .contrib .chip{display:inline-block;margin:.125rem .25rem;padding:.25rem .5rem;border-radius:999px;background:var(--chip,#f1f1f1);font-size:.85rem}
 
-/* Basic header with social links and tool picker */
-.toolbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:.5rem 1rem;
-  background:white;
-  border-bottom:1px solid rgba(15,23,42,.1);
-}
-.toolbar .logo{font-size:1.5rem;}
-.toolbar .social a{
-  margin:0 .25rem;
-  text-decoration:none;
-}
-.tool-picker label{margin-right:.25rem;}
-.fun-fact{
-  background:#fde68a;
-  text-align:center;
-  padding:.5rem 1rem;
-  font-weight:500;
-}
