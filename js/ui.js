@@ -52,16 +52,23 @@ import { setState, getState } from './state.js';
       if (shuffle) shuffle.disabled = true;
     }
 
-    // simple tool picker
-    const picker = document.getElementById('toolSelect');
-    if (picker) {
-      const show = val=>{
-        document.querySelectorAll('section.tool').forEach(sec=>sec.hidden=true);
+    // simple tool picker tabs
+    const buttons = document.querySelectorAll('[data-tool]');
+    if (buttons.length) {
+      const show = val => {
+        document.querySelectorAll('section.tool').forEach(sec => sec.hidden = true);
         const el = document.getElementById(val);
-        if (el) el.hidden=false;
+        if (el) el.hidden = false;
+        buttons.forEach(btn => {
+          const active = btn.getAttribute('data-tool') === val;
+          btn.classList.toggle('bg-slate-900', active);
+          btn.classList.toggle('text-white', active);
+          btn.classList.toggle('bg-white', !active);
+          btn.classList.toggle('hover:bg-slate-50', !active);
+        });
       };
-      picker.addEventListener('change', e=> show(e.target.value));
-      show(picker.value);
+      buttons.forEach(btn => btn.addEventListener('click', () => show(btn.getAttribute('data-tool'))));
+      show(buttons[0].getAttribute('data-tool'));
     }
 
     // tooltip toggling
@@ -69,14 +76,30 @@ import { setState, getState } from './state.js';
     icons.forEach(btn=>{
       const tip = btn.querySelector('.tooltip');
       if(!tip) return;
-      btn.addEventListener('click', ev=>{
-        ev.stopPropagation();
-        const open = btn.hasAttribute('data-open');
-        closeAll();
-        if(!open){
+      let openT, closeT;
+      const open = ()=>{
+        clearTimeout(closeT);
+        if(btn.hasAttribute('data-open')) return;
+        openT = setTimeout(()=>{
+          closeAll();
           btn.setAttribute('data-open','');
           positionTooltip(btn);
-        }
+        }, 100);
+      };
+      const close = ()=>{
+        clearTimeout(openT);
+        closeT = setTimeout(()=>{
+          btn.removeAttribute('data-open');
+          tip.removeAttribute('style');
+        }, 100);
+      };
+      btn.addEventListener('mouseenter', open);
+      btn.addEventListener('focus', open);
+      btn.addEventListener('mouseleave', close);
+      btn.addEventListener('blur', close);
+      btn.addEventListener('click', ev=>{
+        ev.stopPropagation();
+        if(btn.hasAttribute('data-open')) close(); else open();
       });
     });
 
