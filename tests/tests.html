@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Longevity Lab Tests</title>
+<p>Open console for results.</p>
+<script type="module">
+  import { loadAllData } from '../js/dataLoader.js';
+  const worker = new Worker('../workers/longevityWorker.js', {type:'module'});
+  const datasets = await loadAllData();
+  await new Promise(res=>{ worker.onmessage = (e)=>{ if(e.data?.ready) res(); }; worker.postMessage({cmd:'init', payload:datasets}); });
+
+  function run(payload){ return new Promise(res=>{ worker.onmessage = (e)=>res(e.data); worker.postMessage({cmd:'run', payload}); }); }
+
+  const base = await run({sex:'F', age:35, smoking:{status:'never',yearsSinceQuit:0}, metHours:0, bmi:22.5, alcoholDrinks:0, screening:{crc:false,breast:false}, quality:false});
+  console.assert(base.le_baseline>40 && base.le_baseline<60, 'LE baseline plausible');
+
+  const active = await run({sex:'F', age:35, smoking:{status:'never'}, metHours:30, bmi:22.5, alcoholDrinks:0, screening:{crc:false,breast:false}, quality:false});
+  console.assert(active.le_adj >= base.le_baseline, 'Activity non-negative effect');
+
+  const currentSmoker = await run({sex:'M', age:35, smoking:{status:'current'}, metHours:0, bmi:27.5, alcoholDrinks:2, screening:{crc:false,breast:false}, quality:false});
+  console.assert(currentSmoker.le_adj < base.le_baseline, 'Smoking reduces LE');
+
+  console.log('Tests ran. Results:', {base, active, currentSmoker});
+</script>
