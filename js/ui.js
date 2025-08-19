@@ -93,5 +93,16 @@ import { setState, getState } from './state.js';
     };
     window.addEventListener('scroll', reposition, { passive:true });
     window.addEventListener('resize', reposition);
+
+    // collapsible disclaimers and notes
+    document.querySelectorAll('[data-toggle]').forEach(btn=>{
+      const target = document.getElementById(btn.getAttribute('data-toggle'));
+      if(!target) return;
+      btn.addEventListener('click', ()=>{
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        target.hidden = expanded;
+      });
+    });
   });
 })();
