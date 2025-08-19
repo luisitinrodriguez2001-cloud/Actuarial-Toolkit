@@ -1,8 +1,14 @@
 const state = {
-  age: 35, sex:'F',
-  smoking:'never', yearsSinceQuit:0,
-  metHours:10, weight:160, heightFt:5, heightIn:9, alcoholDrinks:0,
-  crc:false, breast:false, quality:false
+  age: 35, sex: 'F',
+  smoking: 'never', yearsSinceQuit: 0,
+  metHours: 10,
+  weight: 160,
+  heightFt: 5,
+  heightIn: 9,
+  alcoholDrinks: 0,
+  crc: false,
+  breast: false,
+  quality: false
 };
 const listeners = [];
 
@@ -22,4 +28,8 @@ export function initStateFromURL(){
       Object.assign(state, saved);
     }catch{}
   }
+}
+
+export function saveToLocal(){
+  localStorage.setItem('longevity_state', JSON.stringify(state));
 }
