@@ -60,8 +60,8 @@ input[type="checkbox"]{ min-width:44px; }
 .chart{margin-bottom:1rem}
 .chart svg{height:280px;width:100%}
 .chart + .chart{margin-top:1rem}
-.chart-title{font-weight:600;text-align:center;margin-bottom:.25rem}
-.chart-note{font-size:.75rem;opacity:.8;text-align:right;margin-top:.25rem}
+.chart-title{font-weight:600;text-align:center;margin-bottom:.5rem}
+.chart-note{font-size:.75rem;opacity:.8;text-align:right;margin-top:.5rem}
 .graph-divider{border-top:2px solid #e5e7eb;margin:1.5rem 0}
 .inline{display:flex;align-items:center;gap:.5rem}
 .disclaimer{font-size:.85rem;opacity:.8}
