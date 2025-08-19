@@ -36,11 +36,11 @@
         <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Actuarial Toolkit</h1>
         <p class="text-slate-600">Crunch the numbers and outwit risk.</p>
       </div>
-      <nav class="flex items-center gap-4 text-sm" aria-label="Social">
+      <div class="flex items-center gap-4 text-sm">
         <a class="inline-flex items-center gap-1 underline" href="https://instagram.com/luisitin2001" target="_blank" rel="noopener">Instagram</a>
         <span class="text-slate-400">&bull;</span>
         <a class="inline-flex items-center gap-1 underline" href="https://www.tiktok.com/@luisitin2001" target="_blank" rel="noopener">TikTok</a>
-      </nav>
+      </div>
     </div>
     <div class="mt-3 flex items-center justify-between text-sm text-slate-600 px-3 py-2 bg-white rounded-lg border">
       <div class="flex items-center gap-2">
@@ -55,14 +55,15 @@
     </div>
   </header>
 
-  <div class="max-w-5xl mx-auto px-4 mb-4">
-    <div class="flex items-center gap-2">
-      <label for="toolSelect">Pick a tool:</label>
-      <select id="toolSelect" class="field">
-        <option value="longevity-lab" selected>Longevity Lab</option>
-      </select>
+  <section class="card max-w-5xl mx-auto mb-4" aria-labelledby="tool-title">
+    <div class="flex items-center justify-between mb-4">
+      <h2 id="tool-title">Pick a Tool</h2>
+      <span class="text-xs text-slate-500">Everything updates automatically</span>
     </div>
-  </div>
+    <div id="toolTabs" class="flex gap-2 overflow-x-auto pb-2">
+      <button type="button" class="border rounded-2xl px-3 py-2 text-left transition-colors flex-shrink-0 bg-slate-900 text-white" data-tool="longevity-lab">Longevity Lab</button>
+    </div>
+  </section>
 
   <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
     <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-gradient-to-br from-amber-200 to-pink-200 blur-3xl opacity-60 animate-floaty"></div>
