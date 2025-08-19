@@ -85,46 +85,65 @@
             </label>
           </fieldset>
 
-          <fieldset>
-            <legend>Behaviors</legend>
+            <fieldset>
+              <legend>Behaviors</legend>
 
-            <label class="inline">Smoking
-              <button type="button" class="icon-btn" aria-label="Smoking info">
-                i
-                <span class="tooltip" role="tooltip" id="smoking-tip">
-                  <span class="tooltip-content">Select ‘Never’ if you’ve never smoked, ‘Current’ if you smoke now, or ‘Former’ if you quit.</span>
-                </span>
-              </button>
-              <select id="smoking" class="field" aria-describedby="smoking-tip">
-                <option value="never">Never</option>
-                <option value="current">Current</option>
-                <option value="former">Former</option>
-              </select>
-            </label>
+              <hr class="my-4" />
 
-            <label id="ysq-wrap" class="inline" hidden>Years since quit
-              <button type="button" class="icon-btn" aria-label="Years since quit info">
-                i
-                <span class="tooltip" role="tooltip" id="ysq-tip">
-                  <span class="tooltip-content">If you used to smoke, how many years ago you quit. Reduces your hazard ratio as the years increase.</span>
-                </span>
-              </button>
-              <input id="yearsSinceQuit" class="field" type="number" min="0" max="60" placeholder="5" aria-describedby="ysq-tip" />
-            </label>
+              <label class="inline">Smoking
+                <button type="button" class="icon-btn" aria-label="Smoking info">
+                  i
+                  <span class="tooltip" role="tooltip" id="smoking-tip">
+                    <span class="tooltip-content">Select ‘Never’ if you’ve never smoked, ‘Current’ if you smoke now, or ‘Former’ if you quit.</span>
+                  </span>
+                </button>
+                <select id="smoking" class="field" aria-describedby="smoking-tip">
+                  <option value="never">Never</option>
+                  <option value="current">Current</option>
+                  <option value="former">Former</option>
+                </select>
+              </label>
 
-            <label class="inline">Physical activity (MET-hours/week)
-              <button type="button" class="icon-btn" aria-label="Physical activity info">
-                i
-                <span class="tooltip" role="tooltip" id="met-tip">
-                  <span class="tooltip-content">Total weekly physical activity measured in metabolic equivalent hours. 7.5-15 MET-h/wk ≈ 150–300 min moderate exercise.</span>
-                </span>
-              </button>
-              <input id="metHours" class="field" type="number" min="0" max="100" step="0.5" placeholder="10" aria-describedby="met-tip" />
-            </label>
+              <label id="ysq-wrap" class="inline" hidden>Years since quit
+                <button type="button" class="icon-btn" aria-label="Years since quit info">
+                  i
+                  <span class="tooltip" role="tooltip" id="ysq-tip">
+                    <span class="tooltip-content">If you used to smoke, how many years ago you quit. Reduces your hazard ratio as the years increase.</span>
+                  </span>
+                </button>
+                <input id="yearsSinceQuit" class="field" type="number" min="0" max="60" placeholder="5" aria-describedby="ysq-tip" />
+              </label>
 
-            <label class="inline">Weight (lbs)
-              <button type="button" class="icon-btn" aria-label="Weight info">
-                i
+              <label id="alcohol-wrap" class="inline" hidden>Alcohol (drinks/day)
+                <button type="button" class="icon-btn" aria-label="Alcohol info">
+                  i
+                  <span class="tooltip" role="tooltip" id="alcohol-tip">
+                    <span class="tooltip-content">Average number of standard drinks you have per day.</span>
+                  </span>
+                </button>
+                <input id="alcohol" class="field" type="number" min="0" max="10" step="0.1" placeholder="0" aria-describedby="alcohol-tip" />
+              </label>
+
+              <hr class="my-4" />
+
+              <label class="inline">Physical activity
+                <button type="button" class="icon-btn" aria-label="Physical activity info">
+                  i
+                  <span class="tooltip" role="tooltip" id="activity-tip">
+                    <span class="tooltip-content">Select your typical weekly activity. We'll estimate MET-hours/week.</span>
+                  </span>
+                </button>
+                <select id="activityLevel" class="field" aria-describedby="activity-tip">
+                  <option value="none">Little to none</option>
+                  <option value="light">1-2 days light exercise</option>
+                  <option value="moderate">3-5 days moderate exercise</option>
+                  <option value="high">6-7 days vigorous exercise</option>
+                </select>
+              </label>
+
+              <label class="inline">Weight (lbs)
+                <button type="button" class="icon-btn" aria-label="Weight info">
+                  i
                 <span class="tooltip" role="tooltip" id="weight-tip">
                   <span class="tooltip-content">Your weight in pounds (lbs). Used to compute Body Mass Index (BMI).</span>
                 </span>
@@ -132,31 +151,25 @@
               <input id="weight" class="field" type="number" min="50" max="1000" step="0.1" placeholder="160" aria-describedby="weight-tip" />
             </label>
 
-            <label class="inline">Height
-              <button type="button" class="icon-btn" aria-label="Height info">
-                i
-                <span class="tooltip" role="tooltip" id="height-tip">
-                  <span class="tooltip-content">Your height in feet and inches. Also used to compute BMI.</span>
-                </span>
-              </button>
-              <input id="heightFeet" class="field" type="number" min="3" max="8" step="1" placeholder="5" aria-label="Height feet" aria-describedby="height-tip" /> ft
-              <input id="heightInches" class="field" type="number" min="0" max="11" step="1" placeholder="9" aria-label="Height inches" aria-describedby="height-tip" /> in
-            </label>
+              <label class="inline">Height
+                <button type="button" class="icon-btn" aria-label="Height info">
+                  i
+                  <span class="tooltip" role="tooltip" id="height-tip">
+                    <span class="tooltip-content">Your height in feet and inches. Also used to compute BMI.</span>
+                  </span>
+                </button>
+                <div class="flex items-center gap-2">
+                  <input id="heightFeet" class="field w-16" type="number" min="3" max="8" step="1" placeholder="5" aria-label="Height feet" aria-describedby="height-tip" /> <span>ft</span>
+                  <input id="heightInches" class="field w-16" type="number" min="0" max="11" step="1" placeholder="9" aria-label="Height inches" aria-describedby="height-tip" /> <span>in</span>
+                </div>
+              </label>
 
-            <label class="inline">Alcohol (drinks/day)
-              <button type="button" class="icon-btn" aria-label="Alcohol info">
-                i
-                <span class="tooltip" role="tooltip" id="alcohol-tip">
-                  <span class="tooltip-content">Average number of standard drinks you have per day.</span>
-                </span>
-              </button>
-              <input id="alcohol" class="field" type="number" min="0" max="10" step="0.1" placeholder="0" aria-describedby="alcohol-tip" />
-            </label>
+              <hr class="my-4" />
 
-            <small class="disclaimer">
-              Associations, not causation. Hazard ratios drawn from large cohort/meta analyses; simplifications apply.
-            </small>
-          </fieldset>
+              <small class="disclaimer">
+                Associations, not causation. Hazard ratios drawn from large cohort/meta analyses; simplifications apply.
+              </small>
+            </fieldset>
 
           <fieldset id="screening_fs">
             <legend class="inline">Preventive screening

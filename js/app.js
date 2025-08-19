@@ -27,16 +27,35 @@ function wireUI() {
   // Inputs
   bindNumber('age', v => update({ age: clamp(+v,20,100) }));
   bindSelect('sex', v => update({ sex: v }));
+  const alcoholWrap = document.getElementById('alcohol-wrap');
   bindSelect('smoking', v => {
     document.getElementById('ysq-wrap').hidden = (v !== 'former');
-    update({ smoking: v });
+    alcoholWrap.hidden = (v !== 'current');
+    if (v !== 'current') {
+      document.getElementById('alcohol').value = 0;
+      update({ smoking: v, alcoholDrinks: 0 });
+    } else {
+      update({ smoking: v });
+    }
   });
   bindNumber('yearsSinceQuit', v => update({ yearsSinceQuit: Math.max(0, +v||0) }));
-  bindNumber('metHours', v => update({ metHours: Math.max(0, +v||0) }));
+
+  const activityMap = { none:0, light:5, moderate:10, high:20 };
+  const actEl = document.getElementById('activityLevel');
+  const met = s.metHours || 0;
+  actEl.value = met>=20 ? 'high' : met>=10 ? 'moderate' : met>=5 ? 'light' : 'none';
+  actEl.addEventListener('change', ev => update({ metHours: activityMap[ev.target.value] }));
+
   bindNumber('weight', v => update({ weight: Math.max(50, +v||50) }), 'weight');
   bindNumber('heightFeet', v => update({ heightFt: Math.max(3, +v||3) }), 'heightFt');
   bindNumber('heightInches', v => update({ heightIn: Math.max(0, Math.min(11, +v||0)) }), 'heightIn');
-  bindNumber('alcohol', v => update({ alcoholDrinks: Math.max(0, +v||0) }));
+  bindNumber('alcohol', v => update({ alcoholDrinks: Math.max(0, +v||0) }), 'alcoholDrinks');
+
+  alcoholWrap.hidden = (s.smoking !== 'current');
+  if (s.smoking !== 'current') {
+    document.getElementById('alcohol').value = 0;
+    update({ alcoholDrinks: 0 });
+  }
 
   const crcEl = document.getElementById('crc_screen');
   crcEl.checked = s.crc;
