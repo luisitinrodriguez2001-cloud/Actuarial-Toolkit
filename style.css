@@ -33,6 +33,7 @@ body {
   border: 1px solid rgba(15,23,42,.12);
   border-radius: 12px;
   padding: .55rem .75rem;
+  min-height:44px;
   font-size: 0.95rem;
   line-height: 1.15rem;
   transition: border-color .2s var(--ease-out), box-shadow .2s var(--ease-out), transform .06s var(--ease-out);
@@ -43,6 +44,10 @@ body {
   box-shadow: var(--ring);
 }
 .field:active{ transform: translateY(0.5px); }
+
+/* Ensure touch targets */
+select, input[type="checkbox"]{ min-height:44px; }
+input[type="checkbox"]{ min-width:44px; }
 
 /* Tiny keyboard style button (Reset) */
 .kbd{

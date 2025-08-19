@@ -1,6 +1,6 @@
 // Bootstrap, state wiring, worker orchestration, charts, CSV/share, disclaimers.
 import { loadAllData } from './dataLoader.js';
-import { getState, setState, onStateChange, initStateFromURL } from './state.js';
+import { getState, setState, onStateChange, initStateFromURL, saveToLocal } from './state.js';
 import { hrLabels } from './hrModels.js';
 import { drawLines } from './charts.js';
 import './ui.js'; // sets up UI listeners and exposes helpers
@@ -23,9 +23,6 @@ document.addEventListener('DOMContentLoaded', init);
 
 function wireUI() {
   const s = getState();
-  // DOM refs
-  const el = id => document.getElementById(elMap[id]||id);
-  const elMap = {}; // noop mapping if needed
 
   // Inputs
   bindNumber('age', v => update({ age: clamp(+v,20,100) }));
@@ -36,9 +33,9 @@ function wireUI() {
   });
   bindNumber('yearsSinceQuit', v => update({ yearsSinceQuit: Math.max(0, +v||0) }));
   bindNumber('metHours', v => update({ metHours: Math.max(0, +v||0) }));
-  bindNumber('weight', v => update({ weight: Math.max(50, +v||50) }));
-  bindNumber('heightFeet', v => update({ heightFt: Math.max(3, +v||3) }));
-  bindNumber('heightInches', v => update({ heightIn: Math.max(0, Math.min(11, +v||0)) }));
+  bindNumber('weight', v => update({ weight: Math.max(50, +v||50) }), 'weight');
+  bindNumber('heightFeet', v => update({ heightFt: Math.max(3, +v||3) }), 'heightFt');
+  bindNumber('heightInches', v => update({ heightIn: Math.max(0, Math.min(11, +v||0)) }), 'heightIn');
   bindNumber('alcohol', v => update({ alcoholDrinks: Math.max(0, +v||0) }));
 
   const crcEl = document.getElementById('crc_screen');
@@ -69,8 +66,8 @@ function wireUI() {
   updateScreeningVisibility();
 
   // Helpers to bind inputs
-  function bindNumber(id, fn){ const e=document.getElementById(id); e.value = s[id] ?? e.value; e.addEventListener('change', ev=>fn(ev.target.value)); }
-  function bindSelect(id, fn){ const e=document.getElementById(id); e.value = s[id] ?? e.value; e.addEventListener('change', ev=>fn(ev.target.value)); }
+  function bindNumber(id, fn, key=id){ const e=document.getElementById(id); e.value = s[key] ?? e.value; e.addEventListener('change', ev=>fn(ev.target.value)); }
+  function bindSelect(id, fn, key=id){ const e=document.getElementById(id); e.value = s[key] ?? e.value; e.addEventListener('change', ev=>fn(ev.target.value)); }
   function update(p){ setState(p); }
   function clamp(x,a,b){ return Math.min(b,Math.max(a,x)); }
 
@@ -183,7 +180,6 @@ function shareURL(){
   alert('Sharable link copied. Reminder: results are population-level; see Assumptions for details.');
 }
 
-function saveToLocal(){ localStorage.setItem('longevity_state', JSON.stringify(getState())); }
 function q(sel){ return document.querySelector(sel); }
 function fix2(x){ return Number(x).toFixed(2); }
 function addSign(x){ return (x>=0?'+':'')+x; }

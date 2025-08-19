@@ -1,57 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Fitness-Toolkit</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14'>😊</text></svg>">
-  <link rel="stylesheet" href="./style.css">
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  />
-  <title>Fitness Toolkit</title>
-
-  <!-- Inter font (clean UI) -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- Tailwind CDN (keeps all your utility classes working) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Actuarial Toolkit</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14'>😊</text></svg>" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script>
     window.tailwind = window.tailwind || {};
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
           keyframes: {
-            fadeUp: { '0%': {opacity:0, transform:'translateY(8px) scale(.98)'}, '100%': {opacity:1, transform:'translateY(0) scale(1)'} },
-            shimmer: { '0%': {backgroundPosition:'-468px 0'}, '100%': {backgroundPosition:'468px 0'} },
-            floaty: { '0%': { transform:'translateY(0px)'}, '50%': { transform:'translateY(-8px)'}, '100%': { transform:'translateY(0px)'} }
+            fadeUp: { '0%':{opacity:0,transform:'translateY(8px) scale(.98)'}, '100%':{opacity:1,transform:'translateY(0) scale(1)'}},
+            shimmer: { '0%':{backgroundPosition:'-468px 0'}, '100%':{backgroundPosition:'468px 0'}},
+            floaty: { '0%':{transform:'translateY(0px)'}, '50%':{transform:'translateY(-8px)'}, '100%':{transform:'translateY(0px)'} }
           },
-          animation: {
-            fadeUp: 'fadeUp .4s cubic-bezier(.2,.8,.2,1) both',
-            floaty: 'floaty 6s ease-in-out infinite',
-          },
-          boxShadow: {
-            card: '0 8px 24px rgba(2, 6, 23, .06)'
-          }
+          animation: { fadeUp:'fadeUp .4s cubic-bezier(.2,.8,.2,1) both', floaty:'floaty 6s ease-in-out infinite' },
+          boxShadow: { card:'0 8px 24px rgba(2, 6, 23, .06)' }
         }
       }
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Your custom layer (tooltip, inputs, micro-interactions, extra motion) -->
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased">
   <header class="toolbar">
@@ -70,34 +44,41 @@
   </header>
   <div id="fun-fact" class="fun-fact"></div>
 
-  <!-- Ambient background blobs (pure CSS, subtle motion) -->
   <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
     <div class="absolute -top-24 -left-24 w-72 h-72 rounded-full bg-gradient-to-br from-amber-200 to-pink-200 blur-3xl opacity-60 animate-floaty"></div>
-    <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-emerald-200 to-sky-200 blur-3xl opacity-60 animate-floaty" style="animation-delay: -2.2s;"></div>
+    <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-emerald-200 to-sky-200 blur-3xl opacity-60 animate-floaty" style="animation-delay:-2.2s;"></div>
   </div>
 
   <main class="relative">
-    <div id="root"></div>
-
     <section id="longevity-lab" class="card tool" aria-labelledby="longevity-title">
       <h2 id="longevity-title">Counterfactual Longevity Lab</h2>
 
-      <!-- Global disclaimer banner -->
       <p class="disclaimer" role="note">
         Population-level estimates only. Uses U.S. period life table + published hazard ratio associations.
         Not medical advice. Results are sensitive to assumptions. See “Assumptions &amp; Data Sources.”
       </p>
 
-      <!-- Controls + Summary -->
       <div class="grid two-col" id="controls">
         <div>
           <fieldset aria-describedby="disclaimer-controls">
             <legend>Profile</legend>
-            <label>Age
-              <input id="age" type="number" min="20" max="100" inputmode="numeric" placeholder="35" />
+            <label class="inline">Age
+              <button type="button" class="icon-btn" aria-label="Age info">
+                i
+                <span class="tooltip" role="tooltip" id="age-tip">
+                  <span class="tooltip-content">Your current age. Used to look up the baseline mortality rate.</span>
+                </span>
+              </button>
+              <input id="age" class="field" type="number" min="20" max="100" inputmode="numeric" placeholder="35" aria-describedby="age-tip" />
             </label>
-            <label>Sex
-              <select id="sex">
+            <label class="inline">Sex
+              <button type="button" class="icon-btn" aria-label="Sex info">
+                i
+                <span class="tooltip" role="tooltip" id="sex-tip">
+                  <span class="tooltip-content">Biological sex (female or male). Determines which life table (F or M) to use.</span>
+                </span>
+              </button>
+              <select id="sex" class="field" aria-describedby="sex-tip">
                 <option value="F">Female</option>
                 <option value="M">Male</option>
               </select>
@@ -107,35 +88,69 @@
           <fieldset>
             <legend>Behaviors</legend>
 
-            <label>Smoking
-              <select id="smoking">
+            <label class="inline">Smoking
+              <button type="button" class="icon-btn" aria-label="Smoking info">
+                i
+                <span class="tooltip" role="tooltip" id="smoking-tip">
+                  <span class="tooltip-content">Select ‘Never’ if you’ve never smoked, ‘Current’ if you smoke now, or ‘Former’ if you quit.</span>
+                </span>
+              </button>
+              <select id="smoking" class="field" aria-describedby="smoking-tip">
                 <option value="never">Never</option>
                 <option value="current">Current</option>
                 <option value="former">Former</option>
               </select>
             </label>
-            <label id="ysq-wrap" class="inline" hidden>
-              Years since quit
-              <input id="yearsSinceQuit" type="number" min="0" max="60" placeholder="5" />
+
+            <label id="ysq-wrap" class="inline" hidden>Years since quit
+              <button type="button" class="icon-btn" aria-label="Years since quit info">
+                i
+                <span class="tooltip" role="tooltip" id="ysq-tip">
+                  <span class="tooltip-content">If you used to smoke, how many years ago you quit. Reduces your hazard ratio as the years increase.</span>
+                </span>
+              </button>
+              <input id="yearsSinceQuit" class="field" type="number" min="0" max="60" placeholder="5" aria-describedby="ysq-tip" />
             </label>
 
-            <label>Physical activity (MET-hours/week)
-              <input id="metHours" type="number" min="0" max="100" step="0.5" placeholder="10" />
+            <label class="inline">Physical activity (MET-hours/week)
+              <button type="button" class="icon-btn" aria-label="Physical activity info">
+                i
+                <span class="tooltip" role="tooltip" id="met-tip">
+                  <span class="tooltip-content">Total weekly physical activity measured in metabolic equivalent hours. 7.5-15 MET-h/wk ≈ 150–300 min moderate exercise.</span>
+                </span>
+              </button>
+              <input id="metHours" class="field" type="number" min="0" max="100" step="0.5" placeholder="10" aria-describedby="met-tip" />
             </label>
 
-            <label>Weight (lbs)
-              <input id="weight" type="number" min="50" max="1000" step="0.1" placeholder="160" />
+            <label class="inline">Weight (lbs)
+              <button type="button" class="icon-btn" aria-label="Weight info">
+                i
+                <span class="tooltip" role="tooltip" id="weight-tip">
+                  <span class="tooltip-content">Your weight in pounds (lbs). Used to compute Body Mass Index (BMI).</span>
+                </span>
+              </button>
+              <input id="weight" class="field" type="number" min="50" max="1000" step="0.1" placeholder="160" aria-describedby="weight-tip" />
             </label>
 
             <label class="inline">Height
-              <input id="heightFeet" type="number" min="3" max="8" step="1" placeholder="5" aria-label="Height feet" />
-              ft
-              <input id="heightInches" type="number" min="0" max="11" step="1" placeholder="9" aria-label="Height inches" />
-              in
+              <button type="button" class="icon-btn" aria-label="Height info">
+                i
+                <span class="tooltip" role="tooltip" id="height-tip">
+                  <span class="tooltip-content">Your height in feet and inches. Also used to compute BMI.</span>
+                </span>
+              </button>
+              <input id="heightFeet" class="field" type="number" min="3" max="8" step="1" placeholder="5" aria-label="Height feet" aria-describedby="height-tip" /> ft
+              <input id="heightInches" class="field" type="number" min="0" max="11" step="1" placeholder="9" aria-label="Height inches" aria-describedby="height-tip" /> in
             </label>
 
-            <label>Alcohol (drinks/day)
-              <input id="alcohol" type="number" min="0" max="10" step="0.1" placeholder="0" />
+            <label class="inline">Alcohol (drinks/day)
+              <button type="button" class="icon-btn" aria-label="Alcohol info">
+                i
+                <span class="tooltip" role="tooltip" id="alcohol-tip">
+                  <span class="tooltip-content">Average number of standard drinks you have per day.</span>
+                </span>
+              </button>
+              <input id="alcohol" class="field" type="number" min="0" max="10" step="0.1" placeholder="0" aria-describedby="alcohol-tip" />
             </label>
 
             <small class="disclaimer">
@@ -144,20 +159,33 @@
           </fieldset>
 
           <fieldset id="screening_fs">
-            <legend>Preventive screening</legend>
+            <legend class="inline">Preventive screening
+              <button type="button" class="icon-btn" aria-label="Preventive screening info">
+                i
+                <span class="tooltip" role="tooltip" id="screening-tip">
+                  <span class="tooltip-content">Adds extra life-years based on USPSTF recommendations.</span>
+                </span>
+              </button>
+            </legend>
             <label id="crc_wrap" hidden><input type="checkbox" id="crc_screen" /> Colorectal: guideline schedule (45–75)</label>
             <label id="breast_wrap" hidden><input type="checkbox" id="breast_screen" /> Breast: biennial from 40–74</label>
             <small class="disclaimer">Modeled as additive life-years/QALYs from published decision analyses.</small>
           </fieldset>
 
           <label class="inline">
-            <input id="qualityToggle" type="checkbox" />
-            Show quality-adjusted years (HALE/QALYs)
+            <input id="qualityToggle" type="checkbox" aria-describedby="quality-tip" />
+            Show quality-adjusted years
+            <button type="button" class="icon-btn" aria-label="Quality adjusted years info">
+              i
+              <span class="tooltip" role="tooltip" id="quality-tip">
+                <span class="tooltip-content">When on, uses healthy life expectancy (HALE) and QALY gains instead of plain life expectancy.</span>
+              </span>
+            </button>
           </label>
 
           <div class="actions">
             <button id="runBtn" class="primary">Recalculate</button>
-            <button id="assumptionsBtn" type="button">Assumptions &amp; Data Sources</button>
+            <button id="assumptionsBtn" type="button" class="secondary">Assumptions &amp; Data Sources</button>
           </div>
           <small id="disclaimer-controls" class="disclaimer">
             This tool uses a period life table (mortality held constant at observed year), proportional-hazards scaling,
@@ -165,7 +193,6 @@
           </small>
         </div>
 
-        <!-- Results summary -->
         <div id="summary" aria-live="polite">
           <div class="stat">
             <div class="stat-label">Remaining life expectancy</div>
@@ -196,17 +223,13 @@
         </div>
       </div>
 
-      <!-- Charts -->
       <div class="chart" id="survivalChart" aria-label="Survival curves baseline vs adjusted"></div>
       <div class="chart" id="cdfChart" aria-label="Cumulative probability of death by age"></div>
 
-      <!-- Assumptions Drawer -->
       <dialog id="assumptionsModal" aria-labelledby="assumptionsTitle">
         <h3 id="assumptionsTitle">Assumptions &amp; Data Sources</h3>
         <div id="assumptionsBody" class="assumptions-body">
-          <p><strong>Method:</strong> Period U.S. life table → annual hazards; apply behavior hazard ratios multiplicatively
-          (proportional hazards). Preventive screenings added as life-years/QALYs from published models. HALE via Sullivan method:
-          person-years weighted by “healthy” prevalence.</p>
+          <p><strong>Method:</strong> Period U.S. life table → annual hazards; apply behavior hazard ratios multiplicatively (proportional hazards). Preventive screenings added as life-years/QALYs from published models. HALE via Sullivan method: person-years weighted by “healthy” prevalence.</p>
 
           <p><strong>Data files used in this app (static JSON):</strong></p>
           <ul>
@@ -218,8 +241,7 @@
             <li><code>data/screening_crc.json</code>, <code>data/screening_breast.json</code> — Life-years/QALYs gained per 1,000 screened.</li>
             <li><code>data/hale_weights.json</code> — Age-specific “healthy” prevalence for Sullivan HALE.</li>
           </ul>
-          <p><strong>Limits &amp; Disclaimers:</strong> Associations ≠ causation; population averages; no comorbidity interactions; period table
-          holds future mortality trends fixed; screening deltas are model-based and simplified to per-person averages. Not medical advice.</p>
+          <p><strong>Limits &amp; Disclaimers:</strong> Associations ≠ causation; population averages; no comorbidity interactions; period table holds future mortality trends fixed; screening deltas are model-based and simplified to per-person averages. Not medical advice.</p>
           <button id="closeAssumptions" class="secondary">Close</button>
         </div>
       </dialog>
@@ -232,21 +254,6 @@
     </div>
   </noscript>
 
-  <!-- React + ReactDOM UMD -->
-  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-
-  <!-- Babel (so you can keep using type="text/babel" locally) -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-  <!-- Your app logic -->
-  <script type="text/babel" src="script.js"></script>
-</body>
-</html>
-<!-- partial -->
-  <script src='https://unpkg.com/react@18/umd/react.development.js'></script>
-<script src='https://unpkg.com/react-dom@18/umd/react-dom.development.js'></script><script  src="./script.js"></script>
-<script type="module" src="js/app.js"></script>
-
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
