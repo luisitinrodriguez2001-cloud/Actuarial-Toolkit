@@ -141,7 +141,15 @@
                     <span class="tooltip-content">Average number of standard drinks you have per day.</span>
                   </span>
                 </button>
-                <input id="alcohol" class="field" type="number" min="0" max="10" step="0.1" placeholder="0" aria-describedby="alcohol-tip" />
+                <select id="alcohol" class="field" aria-describedby="alcohol-tip">
+                  <option value="0">None</option>
+                  <option value="1">1/day</option>
+                  <option value="2">2/day</option>
+                  <option value="3">3/day</option>
+                  <option value="4">4/day</option>
+                  <option value="5">5/day</option>
+                  <option value="6">6+/day</option>
+                </select>
               </label>
 
               <hr class="my-4" />
@@ -201,16 +209,26 @@
                 </span>
               </button>
             </legend>
-            <label id="crc_wrap" hidden>
-              <input type="checkbox" id="crc_screen" />
-              Have you gotten a colorectal screening done?
+            <div id="crc_wrap" hidden>
+              <label class="inline" for="crc_screen">
+                <span class="flex-1">Have you gotten a colorectal screening done?</span>
+                <select id="crc_screen" class="field">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+              </label>
               <span class="block text-slate-600 text-sm">Helps detect colorectal cancer early.</span>
-            </label>
-            <label id="breast_wrap" hidden>
-              <input type="checkbox" id="breast_screen" />
-              Have you gotten a breast cancer screening done?
+            </div>
+            <div id="breast_wrap" hidden>
+              <label class="inline" for="breast_screen">
+                <span class="flex-1">Have you gotten a breast cancer screening done?</span>
+                <select id="breast_screen" class="field">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+              </label>
               <span class="block text-slate-600 text-sm">Helps detect breast cancer early.</span>
-            </label>
+            </div>
             <button type="button" class="what-btn" data-toggle="disc-screen" aria-expanded="false" aria-controls="disc-screen">What is this?</button>
             <small id="disc-screen" class="disclaimer" hidden>Modeled as additive life-years/QALYs from published decision analyses.</small>
           </fieldset>
