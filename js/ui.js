@@ -5,13 +5,9 @@ import { setState, getState } from './state.js';
   function positionTooltip(btn){
     const tip = btn.querySelector('.tooltip');
     if(!tip) return;
-    const rect = btn.getBoundingClientRect();
-    tip.style.position = 'fixed';
-    tip.style.top = `${rect.bottom + 6}px`;
-    tip.style.left = `${rect.left + rect.width/2}px`;
-    const tRect = tip.getBoundingClientRect();
+    const rect = tip.getBoundingClientRect();
     const vpCenter = window.innerWidth/2;
-    const arrow = Math.max(8, Math.min(tRect.width-8, vpCenter - tRect.left));
+    const arrow = Math.max(8, Math.min(rect.width-8, vpCenter - rect.left));
     tip.style.setProperty('--arrow-left', `${arrow}px`);
   }
 
@@ -36,9 +32,9 @@ import { setState, getState } from './state.js';
 
     // fun facts
     const facts = [
-      'Honey never spoils.',
-      'A group of flamingos is called a flamboyance.',
-      'Bananas are berries, but strawberries are not.'
+      'Regular exercise can add years to your life expectancy.',
+      'Smoking can cut life expectancy by up to a decade.',
+      'Healthy diets are linked to longer lifespans.'
     ];
     const ff = document.getElementById('fun-fact');
     const shuffle = document.getElementById('shuffle-fact');

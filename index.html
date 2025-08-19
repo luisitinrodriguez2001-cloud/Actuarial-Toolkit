@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body class="bg-slate-50 text-slate-900 antialiased">
-  <header class="max-w-5xl mx-auto px-4 py-6 bg-white/70 backdrop-blur rounded-xl shadow">
+  <header class="max-w-5xl mx-auto px-4 py-6 bg-white rounded-xl shadow">
     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4 animate-fadeUp">
       <div class="w-16 h-16 rounded-2xl bg-yellow-100 flex items-center justify-center text-3xl shadow bouncy select-none" aria-hidden="true" title="Hi!">🙂</div>
       <div class="flex-1 min-w-0">
@@ -42,7 +42,7 @@
         <a class="inline-flex items-center gap-1 underline" href="https://www.tiktok.com/@luisitin2001" target="_blank" rel="noopener">TikTok</a>
       </nav>
     </div>
-    <div class="mt-3 flex items-center justify-between text-sm text-slate-600 px-3 py-2 bg-white/70 rounded-lg border">
+    <div class="mt-3 flex items-center justify-between text-sm text-slate-600 px-3 py-2 bg-white rounded-lg border">
       <div class="flex items-center gap-2">
         <span class="px-2 py-0.5 rounded bg-slate-100">Fun fact</span>
         <span id="fun-fact" class="animate-fadeUp text-slate-600"></span>
@@ -71,12 +71,11 @@
 
   <main class="relative">
       <section id="longevity-lab" class="card tool" aria-labelledby="longevity-title">
-        <h2 id="longevity-title">Counterfactual Longevity Lab</h2>
+        <h2 id="longevity-title">Longevity Lab</h2>
 
         <button type="button" class="what-btn" data-toggle="disc-main" aria-expanded="false" aria-controls="disc-main">What is this?</button>
         <p id="disc-main" class="disclaimer" role="note" hidden>
-          Population-level estimates only. Uses U.S. period life table + published hazard ratio associations.
-          Not medical advice. Results are sensitive to assumptions. See “Assumptions &amp; Data Sources.”
+          Population-level estimates from U.S. life tables and hazard ratios. Not medical advice.
         </p>
 
       <div class="grid two-col" id="controls">
@@ -233,8 +232,7 @@
             </div>
             <button type="button" class="what-btn" data-toggle="disclaimer-controls" aria-expanded="false" aria-controls="disclaimer-controls">What is this?</button>
             <small id="disclaimer-controls" class="disclaimer" hidden>
-              This tool uses a period life table (mortality held constant at observed year), proportional-hazards scaling,
-              and screening deltas from external models. It is not personalized medical guidance.
+              Uses period life tables and hazard ratios. Not medical advice.
             </small>
           </div>
 
@@ -243,13 +241,13 @@
             <button type="button" class="icon-btn" aria-label="Life expectancy explanations">
               i
               <span class="tooltip" role="tooltip" id="summary-tip">
-                <span class="tooltip-content">Life expectancy shows expected age at death. Healthy life expectancy counts only years in good health.</span>
+                <span class="tooltip-content">Life expectancy is total expected years. Healthy life expectancy counts only years in good health.</span>
               </span>
             </button>
           </div>
 
           <div class="stat">
-            <div class="stat-label">Life expectancy (age)</div>
+            <div class="stat-label">Life expectancy (total years)</div>
             <div class="stat-value">
               <span id="le_baseline">–</span> → <span id="le_adjusted">–</span>
             </div>
@@ -257,7 +255,7 @@
           </div>
 
           <div class="stat" id="hale-row" hidden>
-            <div class="stat-label">Healthy life expectancy</div>
+            <div class="stat-label">Healthy life expectancy (healthy years)</div>
             <div class="stat-value">
               <span id="hale_baseline">–</span> → <span id="hale_adjusted">–</span>
             </div>
@@ -268,7 +266,6 @@
 
           <div class="actions">
             <button id="downloadCsv" type="button">Download CSV</button>
-            <button id="shareState" type="button">Share</button>
           </div>
 
           <button type="button" class="what-btn" data-toggle="disc-csv" aria-expanded="false" aria-controls="disc-csv">What is this?</button>
@@ -279,6 +276,7 @@
       </div>
 
       <div class="chart" id="survivalChart" aria-label="Survival curves baseline vs adjusted"></div>
+      <hr class="graph-divider" />
       <div class="chart" id="cdfChart" aria-label="Cumulative probability of death by age"></div>
 
         <dialog id="assumptionsModal" aria-labelledby="assumptionsTitle">
