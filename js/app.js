@@ -33,7 +33,7 @@ function wireUI() {
     document.getElementById('ysq-wrap').hidden = (v !== 'former');
     alcoholWrap.hidden = (v !== 'current');
     if (v !== 'current') {
-      document.getElementById('alcohol').value = 0;
+      document.getElementById('alcohol').value = '0';
       update({ smoking: v, alcoholDrinks: 0 });
     } else {
       update({ smoking: v });
@@ -50,20 +50,20 @@ function wireUI() {
   bindNumber('weight', v => update({ weight: Math.max(50, +v||50) }), 'weight');
   bindNumber('heightFeet', v => update({ heightFt: Math.max(3, +v||3) }), 'heightFt');
   bindNumber('heightInches', v => update({ heightIn: Math.max(0, Math.min(11, +v||0)) }), 'heightIn');
-  bindNumber('alcohol', v => update({ alcoholDrinks: Math.max(0, +v||0) }), 'alcoholDrinks');
+  bindSelect('alcohol', v => update({ alcoholDrinks: Math.max(0, +v||0) }), 'alcoholDrinks');
 
   alcoholWrap.hidden = (s.smoking !== 'current');
   if (s.smoking !== 'current') {
-    document.getElementById('alcohol').value = 0;
+    document.getElementById('alcohol').value = '0';
     update({ alcoholDrinks: 0 });
   }
 
   const crcEl = document.getElementById('crc_screen');
-  crcEl.checked = s.crc;
-  crcEl.addEventListener('change', e => update({ crc: e.target.checked }));
+  crcEl.value = s.crc ? 'yes' : 'no';
+  crcEl.addEventListener('change', e => update({ crc: e.target.value === 'yes' }));
   const breastEl = document.getElementById('breast_screen');
-  breastEl.checked = s.breast;
-  breastEl.addEventListener('change', e => update({ breast: e.target.checked }));
+  breastEl.value = s.breast ? 'yes' : 'no';
+  breastEl.addEventListener('change', e => update({ breast: e.target.value === 'yes' }));
   document.getElementById('qualityToggle').addEventListener('change', e => update({ quality: e.target.checked }));
   document.getElementById('runBtn').addEventListener('click', run);
 
@@ -99,8 +99,8 @@ function wireUI() {
     const showBreast = sex==='F' && age>=40 && age<=74;
     crcWrap.hidden = !showCRC;
     breastWrap.hidden = !showBreast;
-    if(!showCRC && getState().crc){ crcEl.checked=false; setState({crc:false}); }
-    if(!showBreast && getState().breast){ breastEl.checked=false; setState({breast:false}); }
+    if(!showCRC && getState().crc){ crcEl.value='no'; setState({crc:false}); }
+    if(!showBreast && getState().breast){ breastEl.value='no'; setState({breast:false}); }
     fs.hidden = !showCRC && !showBreast;
   }
 }

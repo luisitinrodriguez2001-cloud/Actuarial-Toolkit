@@ -3,7 +3,7 @@ export function drawLines(containerId, series, opts={}){
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = '';
-  const W = el.clientWidth || 640, H = el.clientHeight || 280, m={t:20,r:15,b:40,l:40};
+  const W = el.clientWidth || 640, H = el.clientHeight || 280, m={t:30,r:20,b:60,l:50};
   const svg = h('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',height:'100%',role:'img'});
   el.appendChild(svg);
 
@@ -20,19 +20,19 @@ export function drawLines(containerId, series, opts={}){
   // axes
   line(m.l,H-m.b,W-m.r,H-m.b, '#aaa'); // x
   line(m.l,m.t,m.l,H-m.b, '#aaa');     // y
-  text(m.l, m.t-6, opts.yLabel||'', 'start');
-  text(W-m.r, H-m.b+22, opts.xLabel||'', 'end');
+  text(m.l, m.t-12, opts.yLabel||'', 'start');
+  text(W-m.r, H-m.b+30, opts.xLabel||'', 'end');
 
   // ticks (simple)
   for (let a = Math.ceil(xMin/10)*10; a<=xMax; a+=10){
-    const x=sx(a); line(x,H-m.b,x,H-m.b+4,'#aaa'); text(x,H-m.b+18,''+a,'middle');
+    const x=sx(a); line(x,H-m.b,x,H-m.b+6,'#aaa'); text(x,H-m.b+24,''+a,'middle');
   }
   const yStep = opts.yPercent ? 0.25 : 0.25;
   for (let p=0; p<=1.0001; p+=yStep){
     const y=sy(p);
     const label = opts.yPercent ? `${Math.round(p*100)}%` : ''+p;
-    line(m.l,y,m.l-4,y,'#aaa');
-    text(m.l-8,y,label,'end','middle');
+    line(m.l,y,m.l-6,y,'#aaa');
+    text(m.l-12,y,label,'end','middle');
   }
 
   // lines
@@ -47,7 +47,7 @@ export function drawLines(containerId, series, opts={}){
   });
 
   if (opts.disclaimer){
-    text(W-10, H-6, 'Population-level; period table; associations; see Assumptions.', 'end', 'baseline', '0.75em');
+    text(W-10, H-12, 'Population-level; period table; associations; see Assumptions.', 'end', 'baseline', '0.75em');
   }
 
   function h(tag,attrs){ const e=document.createElementNS('http://www.w3.org/2000/svg',tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e; }
