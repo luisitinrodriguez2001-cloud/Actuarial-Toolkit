@@ -94,13 +94,24 @@ body {
   border-radius: .6rem;
   box-shadow: 0 18px 40px rgba(2,6,23,.12);
   opacity: 0;
+  --arrow-left:50%;
   transition:
     opacity .18s var(--ease-out),
     transform .18s var(--ease-out);
   z-index: 40;
 }
-.icon-btn:hover .tooltip,
-.icon-btn:focus-visible .tooltip{
+.icon-btn .tooltip::before{
+  content:'';
+  position:absolute;
+  top:-6px;
+  left:var(--arrow-left);
+  transform:translateX(-50%) rotate(45deg);
+  width:12px; height:12px;
+  background:inherit;
+  border-left:1px solid rgba(15,23,42,.12);
+  border-top:1px solid rgba(15,23,42,.12);
+}
+.icon-btn[data-open] .tooltip{
   pointer-events: auto;
   opacity: 1;
   transform: translateX(-50%) translateY(10px) scale(1);

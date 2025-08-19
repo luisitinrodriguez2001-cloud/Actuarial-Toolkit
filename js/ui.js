@@ -2,6 +2,27 @@
 import { setState, getState } from './state.js';
 
 (function(){
+  function positionTooltip(btn){
+    const tip = btn.querySelector('.tooltip');
+    if(!tip) return;
+    const rect = btn.getBoundingClientRect();
+    tip.style.position = 'fixed';
+    tip.style.top = `${rect.bottom + 6}px`;
+    tip.style.left = `${rect.left + rect.width/2}px`;
+    const tRect = tip.getBoundingClientRect();
+    const vpCenter = window.innerWidth/2;
+    const arrow = Math.max(8, Math.min(tRect.width-8, vpCenter - tRect.left));
+    tip.style.setProperty('--arrow-left', `${arrow}px`);
+  }
+
+  function closeAll(){
+    document.querySelectorAll('.icon-btn[data-open]').forEach(btn=>{
+      btn.removeAttribute('data-open');
+      const tip = btn.querySelector('.tooltip');
+      if(tip) tip.removeAttribute('style');
+    });
+  }
+
   document.addEventListener('change', e=>{
     if (e.target?.id==='smoking'){
       document.getElementById('ysq-wrap').hidden = (e.target.value!=='former');
@@ -46,5 +67,31 @@ import { setState, getState } from './state.js';
       picker.addEventListener('change', e=> show(e.target.value));
       show(picker.value);
     }
+
+    // tooltip toggling
+    const icons = document.querySelectorAll('.icon-btn');
+    icons.forEach(btn=>{
+      const tip = btn.querySelector('.tooltip');
+      if(!tip) return;
+      btn.addEventListener('click', ev=>{
+        ev.stopPropagation();
+        const open = btn.hasAttribute('data-open');
+        closeAll();
+        if(!open){
+          btn.setAttribute('data-open','');
+          positionTooltip(btn);
+        }
+      });
+    });
+
+    document.addEventListener('click', closeAll);
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAll(); });
+
+    const reposition = ()=>{
+      const open = document.querySelector('.icon-btn[data-open]');
+      if(open) positionTooltip(open);
+    };
+    window.addEventListener('scroll', reposition, { passive:true });
+    window.addEventListener('resize', reposition);
   });
 })();
