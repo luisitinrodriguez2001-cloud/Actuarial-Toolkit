@@ -7,6 +7,7 @@ import './ui.js'; // sets up UI listeners and exposes helpers
 
 let worker;
 let datasets;
+let currentAge = 0;
 
 async function init() {
   datasets = await loadAllData();
@@ -107,6 +108,7 @@ function wireUI() {
 
 function run() {
   const st = getStateForWorker();
+  currentAge = +st.age;
   worker.postMessage({ cmd:'run', payload: st });
 }
 
@@ -114,8 +116,8 @@ function onWorkerMessage(e) {
   const msg = e.data;
   if (msg.ready) return;
   // update summary numbers
-  q('#le_baseline').textContent = fix2(msg.le_baseline);
-  q('#le_adjusted').textContent = fix2(msg.le_adj);
+  q('#le_baseline').textContent = fix2(currentAge + msg.le_baseline);
+  q('#le_adjusted').textContent = fix2(currentAge + msg.le_adj);
   q('#le_delta').textContent    = addSign(fix2(msg.le_delta));
 
   if (msg.hale_baseline != null) {
@@ -140,14 +142,14 @@ function onWorkerMessage(e) {
   drawLines('survivalChart', [
     { name:'Baseline', x: msg.survival.age, y: msg.survival.S_base },
     { name:'Adjusted', x: msg.survival.age, y: msg.survival.S_adj }
-  ], { yLabel:'Survival S(x)', xLabel:'Age', disclaimer:true });
+  ], { yLabel:'Survival', xLabel:'Age', yPercent:true, disclaimer:true });
 
   const oneMinusS = msg.survival.S_base.map((v,i)=>1-v);
   const oneMinusSa= msg.survival.S_adj.map((v,i)=>1-v);
   drawLines('cdfChart', [
     { name:'Baseline', x: msg.survival.age, y: oneMinusS },
     { name:'Adjusted', x: msg.survival.age, y: oneMinusSa }
-  ], { yLabel:'Cumulative probability of death', xLabel:'Age', disclaimer:true });
+  ], { yLabel:'Cumulative probability of death', xLabel:'Age', yPercent:true, disclaimer:true });
 }
 
 function getStateForWorker(){

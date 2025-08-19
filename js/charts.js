@@ -3,7 +3,7 @@ export function drawLines(containerId, series, opts={}){
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = '';
-  const W = el.clientWidth || 640, H = el.clientHeight || 280, m={t:20,r:15,b:30,l:40};
+  const W = el.clientWidth || 640, H = el.clientHeight || 280, m={t:20,r:15,b:40,l:40};
   const svg = h('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',height:'100%',role:'img'});
   el.appendChild(svg);
 
@@ -11,7 +11,8 @@ export function drawLines(containerId, series, opts={}){
   const xs = series.flatMap(s=>s.x);
   const ys = series.flatMap(s=>s.y);
   const xMin = Math.min(...xs), xMax = Math.max(...xs);
-  const yMin = Math.min(0, ...ys), yMax = Math.max(1, ...ys);
+  const yMin = Math.min(0, ...ys);
+  const yMax = opts.yPercent ? 1 : Math.max(1, ...ys);
 
   const sx = v => m.l + (v-xMin)/(xMax-xMin) * (W-m.l-m.r);
   const sy = v => H - m.b - (v-yMin)/(yMax-yMin) * (H-m.t-m.b);
@@ -26,8 +27,12 @@ export function drawLines(containerId, series, opts={}){
   for (let a = Math.ceil(xMin/10)*10; a<=xMax; a+=10){
     const x=sx(a); line(x,H-m.b,x,H-m.b+4,'#aaa'); text(x,H-m.b+18,''+a,'middle');
   }
-  for (let p=0; p<=1.0001; p+=0.25){
-    const y=sy(p); line(m.l,y,m.l-4,y,'#aaa'); text(m.l-8,y,''+p,'end','middle');
+  const yStep = opts.yPercent ? 0.25 : 0.25;
+  for (let p=0; p<=1.0001; p+=yStep){
+    const y=sy(p);
+    const label = opts.yPercent ? `${Math.round(p*100)}%` : ''+p;
+    line(m.l,y,m.l-4,y,'#aaa');
+    text(m.l-8,y,label,'end','middle');
   }
 
   // lines
