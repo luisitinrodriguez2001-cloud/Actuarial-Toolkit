@@ -1,0 +1,11 @@
+{
+  "current": 2.80,
+  "former_decay": [
+    { "years": 0,  "HR": 2.0 },
+    { "years": 5,  "HR": 1.5 },
+    { "years": 10, "HR": 1.2 },
+    { "years": 15, "HR": 1.05 },
+    { "years": 20, "HR": 1.00 }
+  ],
+  "never": 1.00
+}
