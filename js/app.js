@@ -141,14 +141,14 @@ function onWorkerMessage(e) {
   drawLines('survivalChart', [
     { name:'Baseline', x: msg.survival.age, y: msg.survival.S_base },
     { name:'Adjusted', x: msg.survival.age, y: msg.survival.S_adj }
-  ], { yLabel:'Survival', xLabel:'Age', yPercent:true, disclaimer:true });
+  ], { title:'Survival', xLabel:'Age', yPercent:true, disclaimer:true });
 
   const oneMinusS = msg.survival.S_base.map((v,i)=>1-v);
   const oneMinusSa= msg.survival.S_adj.map((v,i)=>1-v);
   drawLines('cdfChart', [
     { name:'Baseline', x: msg.survival.age, y: oneMinusS },
     { name:'Adjusted', x: msg.survival.age, y: oneMinusSa }
-  ], { yLabel:'Cumulative probability of death', xLabel:'Age', yPercent:true, disclaimer:true });
+  ], { title:'Cumulative probability of death', xLabel:'Age', yPercent:true, disclaimer:true });
 }
 
 function getStateForWorker(){

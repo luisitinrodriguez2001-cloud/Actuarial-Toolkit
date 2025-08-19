@@ -3,8 +3,18 @@ export function drawLines(containerId, series, opts={}){
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = '';
-  const W = el.clientWidth || 640, H = el.clientHeight || 280, m={t:30,r:20,b:60,l:50};
-  const svg = h('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',height:'100%',role:'img'});
+  const W = el.clientWidth || 640;
+  const H = opts.height || 280;
+  const m = {t:30,r:20,b:60,l:50};
+
+  if (opts.title){
+    const t = document.createElement('div');
+    t.className = 'chart-title';
+    t.textContent = opts.title;
+    el.appendChild(t);
+  }
+
+  const svg = h('svg',{viewBox:`0 0 ${W} ${H}`,width:'100%',height:H,role:'img'});
   el.appendChild(svg);
 
   // Flatten domains
@@ -20,7 +30,6 @@ export function drawLines(containerId, series, opts={}){
   // axes
   line(m.l,H-m.b,W-m.r,H-m.b, '#aaa'); // x
   line(m.l,m.t,m.l,H-m.b, '#aaa');     // y
-  text(m.l, m.t-12, opts.yLabel||'', 'start');
   text(W-m.r, H-m.b+30, opts.xLabel||'', 'end');
 
   // ticks (simple)
@@ -47,7 +56,10 @@ export function drawLines(containerId, series, opts={}){
   });
 
   if (opts.disclaimer){
-    text(W-10, H-12, 'Population-level; period table; associations; see Assumptions.', 'end', 'baseline', '0.75em');
+    const note = document.createElement('div');
+    note.className = 'chart-note';
+    note.textContent = 'Population-level; period table; associations; see Assumptions.';
+    el.appendChild(note);
   }
 
   function h(tag,attrs){ const e=document.createElementNS('http://www.w3.org/2000/svg',tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e; }
