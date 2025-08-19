@@ -219,10 +219,25 @@ button[type="button"]:active { transform: translateY(1px); }
 }
 
 .card-grid{
-  display:grid;
-  gap:1rem;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-}
+    display:grid;
+    gap:1rem;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  }
+
+/* Longevity Lab utilities */
+.grid.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:800px){.grid.two-col{grid-template-columns:1fr}}
+.card{padding:1rem;border-radius:8px}
+.stat{margin:.5rem 0}
+.stat-label{font-size:.9rem;opacity:.8}
+.stat-value{font-size:1.25rem;font-weight:600}
+.stat-delta{color:var(--accent,#1a7f37)}
+.chart{height:280px}
+.inline{display:flex;align-items:center;gap:.5rem}
+.disclaimer{font-size:.85rem;opacity:.8}
+#assumptionsModal{max-width:min(760px,90vw)}
+.assumptions-body{max-height:70vh;overflow:auto}
+.contrib .chip{display:inline-block;margin:.125rem .25rem;padding:.25rem .5rem;border-radius:999px;background:var(--chip,#f1f1f1);font-size:.85rem}
 
 .editor{
   background:white;
