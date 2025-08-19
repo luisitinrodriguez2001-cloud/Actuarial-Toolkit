@@ -121,8 +121,8 @@ function onWorkerMessage(e) {
   q('#le_delta').textContent    = addSign(fix2(msg.le_delta));
 
   if (msg.hale_baseline != null) {
-    q('#hale_baseline').textContent = fix2(msg.hale_baseline);
-    q('#hale_adjusted').textContent = fix2(msg.hale_adj);
+    q('#hale_baseline').textContent = fix2(currentAge + msg.hale_baseline);
+    q('#hale_adjusted').textContent = fix2(currentAge + msg.hale_adj);
     q('#hale_delta').textContent    = addSign(fix2(msg.hale_delta));
     document.getElementById('hale-row').hidden = false;
   } else {
