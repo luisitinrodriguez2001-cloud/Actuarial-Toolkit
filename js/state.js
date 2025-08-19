@@ -1,7 +1,7 @@
 const state = {
   age: 35, sex: 'F',
   smoking: 'never', yearsSinceQuit: 0,
-  metHours: 10,
+  metHours: null,
   weight: 160,
   heightFt: 5,
   heightIn: 9,

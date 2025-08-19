@@ -43,7 +43,7 @@ function wireUI() {
 
   const activityMap = { none:0, light:5, moderate:10, high:20 };
   const actEl = document.getElementById('activityLevel');
-  const met = s.metHours || 0;
+  const met = s.metHours ?? 10;
   actEl.value = met>=20 ? 'high' : met>=10 ? 'moderate' : met>=5 ? 'light' : 'none';
   actEl.addEventListener('change', ev => update({ metHours: activityMap[ev.target.value] }));
 
@@ -160,7 +160,7 @@ function getStateForWorker(){
     sex: s.sex,
     age: +s.age || 35,
     smoking: { status: s.smoking, yearsSinceQuit: s.yearsSinceQuit||0 },
-    metHours: +s.metHours || 10,
+    metHours: (s.metHours ?? 10),
     bmi: bmi,
     alcoholDrinks: +s.alcoholDrinks || 0,
     screening: { crc: !!s.crc, breast: !!s.breast },
@@ -178,7 +178,7 @@ function downloadCsv(){
     const header = [
       'DISCLAIMER: Population-level, period life table, proportional hazards; not medical advice.',
       'See site UI for full “Assumptions & Data Sources.”',
-      `Inputs: sex=${s.sex}, age=${s.age}, weight=${s.weight}lbs, height=${s.heightFt}ft${s.heightIn}in (BMI=${fix2(calcBMI(s))}), smoke=${s.smoking}${s.smoking==='former'?`(${s.yearsSinceQuit}y)`:''}, MET=${s.metHours}, alcohol=${s.alcoholDrinks}, CRC=${!!s.crc}, Breast=${!!s.breast}, Quality=${!!s.quality}`,
+      `Inputs: sex=${s.sex}, age=${s.age}, weight=${s.weight}lbs, height=${s.heightFt}ft${s.heightIn}in (BMI=${fix2(calcBMI(s))}), smoke=${s.smoking}${s.smoking==='former'?`(${s.yearsSinceQuit}y)`:''}, MET=${s.metHours ?? 10}, alcohol=${s.alcoholDrinks}, CRC=${!!s.crc}, Breast=${!!s.breast}, Quality=${!!s.quality}`,
       `LE baseline=${fix2(m.le_baseline)}; LE adjusted=${fix2(m.le_adj)}; Δ=${addSign(fix2(m.le_delta))}`,
       (m.hale_baseline!=null?`HALE baseline=${fix2(m.hale_baseline)}; HALE adjusted=${fix2(m.hale_adj)}; Δ=${addSign(fix2(m.hale_delta))}`:''),
       'age,S_baseline,S_adjusted'
