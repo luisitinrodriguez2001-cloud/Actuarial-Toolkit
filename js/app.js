@@ -124,17 +124,22 @@ function onWorkerMessage(e) {
     c.appendChild(span);
   });
 
-  // charts
+  // charts (conditional on current age)
+  const idx = msg.survival.age.findIndex(a => a >= currentAge);
+  const ages = msg.survival.age.slice(idx);
+  const baseCond = msg.survival.S_base.slice(idx).map(v => v / msg.survival.S_base[idx]);
+  const adjCond  = msg.survival.S_adj.slice(idx).map(v => v / msg.survival.S_adj[idx]);
+
   drawLines('survivalChart', [
-    { name:'Baseline', x: msg.survival.age, y: msg.survival.S_base },
-    { name:'Adjusted', x: msg.survival.age, y: msg.survival.S_adj }
+    { name:'Baseline', x: ages, y: baseCond },
+    { name:'Adjusted', x: ages, y: adjCond }
   ], { title:'Survival', xLabel:'Age', yPercent:true, disclaimer:true });
 
-  const oneMinusS = msg.survival.S_base.map((v,i)=>1-v);
-  const oneMinusSa= msg.survival.S_adj.map((v,i)=>1-v);
+  const oneMinusS  = baseCond.map(v=>1-v);
+  const oneMinusSa = adjCond.map(v=>1-v);
   drawLines('cdfChart', [
-    { name:'Baseline', x: msg.survival.age, y: oneMinusS },
-    { name:'Adjusted', x: msg.survival.age, y: oneMinusSa }
+    { name:'Baseline', x: ages, y: oneMinusS },
+    { name:'Adjusted', x: ages, y: oneMinusSa }
   ], { title:'Cumulative probability of death', xLabel:'Age', yPercent:true, disclaimer:true });
 }
 
