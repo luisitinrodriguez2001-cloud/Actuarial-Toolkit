@@ -1,5 +1,5 @@
 {
   "bins_BMI": [0, 18.5, 22.5, 25, 27.5, 30, 35, 40, 70],
   "HR":       [1.22, 1.00, 1.00, 1.07, 1.20, 1.45, 1.94, 2.76],
-  "source": "Global BMI Mortality Collaboration. Body-mass index and all-cause mortality. Lancet 2016. https://pubmed.ncbi.nlm.nih.gov/27423263/"
+  "source": "Global BMI Mortality Collaboration. Body-mass index and all-cause mortality. Lancet 2016"
 }
