@@ -1,5 +1,5 @@
 {
   "bins_MET_h_week": [0, 7.5, 15, 22.5, 37.5, 60, 90],
   "HR":              [1.00, 0.81, 0.69, 0.61, 0.55, 0.53, 0.53],
-  "source": "Arem H et al. Leisure time physical activity and mortality. JAMA Intern Med 2015. https://doi.org/10.1001/jamainternmed.2015.0533"
+  "source": "Arem H et al. Leisure time physical activity and mortality. JAMA Intern Med 2015. https://pubmed.ncbi.nlm.nih.gov/25758054/"
 }

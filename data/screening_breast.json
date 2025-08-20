@@ -2,5 +2,5 @@
   "default_schedule": { "startAge": 40, "stopAge": 74, "intervalYears": 2 },
   "LYG_per_1000": 60,
   "QALY_per_1000": 45,
-  "source": "U.S. Preventive Services Task Force. Screening for Breast Cancer: Recommendation Statement. Ann Intern Med. 2016. https://doi.org/10.7326/M15-2886"
+  "source": "U.S. Preventive Services Task Force. Screening for Breast Cancer: Recommendation Statement. Ann Intern Med. 2016. https://pubmed.ncbi.nlm.nih.gov/26757170/"
 }
