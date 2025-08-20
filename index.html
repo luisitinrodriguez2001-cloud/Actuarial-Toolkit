@@ -72,6 +72,7 @@
     </div>
     <div id="toolTabs" class="flex gap-2 overflow-x-auto pb-2">
       <button type="button" class="border rounded-2xl px-3 py-2 text-left transition-colors flex-shrink-0 bg-slate-900 text-white" data-tool="longevity-lab">Longevity Lab</button>
+      <button data-tool="methodology" class="border rounded-2xl px-3 py-2 bg-white hover:bg-slate-50">Methodology</button>
     </div>
   </section>
 
@@ -329,8 +330,27 @@
             <button id="closeAssumptions" class="secondary">Close</button>
           </div>
         </dialog>
-    </section>
-  </main>
+      </section>
+
+      <section id="methodology" class="card tool" hidden>
+        <h2>Methodology</h2>
+        <select id="methodology-select" class="field">
+          <option value="" disabled selected>Select variable...</option>
+          <option value="smoking">Smoking</option>
+          <option value="physical_activity">Physical Activity</option>
+          <option value="bmi">BMI</option>
+          <option value="alcohol">Alcohol</option>
+          <option value="diet">Diet</option>
+          <option value="blood_pressure_cholesterol">Blood Pressure/Cholesterol</option>
+          <option value="diabetes">Diabetes</option>
+          <option value="sleep">Sleep</option>
+          <option value="socioeconomic_status">Socioeconomic Status</option>
+          <option value="colorectal_screening">Colorectal Screening</option>
+          <option value="breast_screening">Breast Screening</option>
+        </select>
+        <div id="methodology-content" class="mt-4"></div>
+      </section>
+    </main>
 
   <noscript>
     <div class="max-w-xl mx-auto mt-12 p-4 rounded-xl bg-white/80 border">

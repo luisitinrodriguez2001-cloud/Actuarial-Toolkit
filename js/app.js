@@ -4,6 +4,7 @@ import { getState, setState, onStateChange, initStateFromURL, saveToLocal } from
 import { hrLabels } from './hrModels.js';
 import { drawLines } from './charts.js';
 import './ui.js'; // sets up UI listeners and exposes helpers
+import { loadMethodology } from './methodology.js';
 
 let worker;
 let datasets;
@@ -18,6 +19,7 @@ async function init() {
 
   initStateFromURL();
   wireUI();
+  loadMethodology();
   run(); // initial run
 }
 document.addEventListener('DOMContentLoaded', init);
