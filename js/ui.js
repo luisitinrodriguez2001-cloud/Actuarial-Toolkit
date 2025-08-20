@@ -76,22 +76,14 @@ import { setState, getState } from './state.js';
     icons.forEach(btn=>{
       const tip = btn.querySelector('.tooltip');
       if(!tip) return;
-      let openT, closeT;
       const open = ()=>{
-        clearTimeout(closeT);
-        if(btn.hasAttribute('data-open')) return;
-        openT = setTimeout(()=>{
-          closeAll();
-          btn.setAttribute('data-open','');
-          positionTooltip(btn);
-        }, 100);
+        closeAll();
+        btn.setAttribute('data-open','');
+        positionTooltip(btn);
       };
       const close = ()=>{
-        clearTimeout(openT);
-        closeT = setTimeout(()=>{
-          btn.removeAttribute('data-open');
-          tip.removeAttribute('style');
-        }, 100);
+        btn.removeAttribute('data-open');
+        tip.removeAttribute('style');
       };
       btn.addEventListener('mouseenter', open);
       btn.addEventListener('focus', open);
