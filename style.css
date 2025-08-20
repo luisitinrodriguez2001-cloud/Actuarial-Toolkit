@@ -312,6 +312,8 @@ input[type="checkbox"]{ min-width:44px; }
 @media(max-width:600px){
   .chart{margin:.5rem 0}
   .chart svg{height:200px}
-  .chart + .chart{margin-top:.5rem}
+.chart + .chart{margin-top:.5rem}
 }
+
+#methodology-content p{margin-bottom:.5rem;}
 
