@@ -3,35 +3,35 @@
 export const methodologyInfo = {
   smoking: `
     <h3>Smoking</h3>
-    <p><strong>Source:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/23343063/" target="_blank" rel="noopener">Jha et al., 2013</a></p>
+    <p><strong>Source:</strong> Jha et al., 2013</p>
     <p><strong>Implementation:</strong> js/hrModels.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Current smokers have about 2.8× the mortality of never smokers; quitting for ∼20 years returns risk to baseline.</p>
     <p><strong>Mitigation:</strong> Quit smoking and avoid secondhand exposure.</p>
-    <p><strong>Population:</strong> About 9.9% of U.S. adults smoke <a href="https://www.cdc.gov/nchs/fastats/smoking.htm" target="_blank" rel="noopener">(CDC)</a>.</p>
+    <p><strong>Population:</strong> About 9.9% of U.S. adults smoke (CDC).</p>
   `,
   physical_activity: `
     <h3>Physical Activity</h3>
-    <p><strong>Source:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/25758054/" target="_blank" rel="noopener">Arem et al., 2015</a></p>
+    <p><strong>Source:</strong> Arem et al., 2015</p>
     <p><strong>Implementation:</strong> js/hrModels.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> ≥60 MET‑h/week corresponds to HR≈0.53 (47% lower mortality) versus inactivity.</p>
     <p><strong>Mitigation:</strong> Engage in regular moderate or vigorous exercise.</p>
-    <p><strong>Population:</strong> Only 24.2% meet both aerobic and strength guidelines <a href="https://www.cdc.gov/nchs/fastats/exercise.htm" target="_blank" rel="noopener">(CDC)</a>.</p>
+    <p><strong>Population:</strong> Only 24.2% meet both aerobic and strength guidelines (CDC).</p>
   `,
   bmi: `
     <h3>BMI</h3>
-    <p><strong>Source:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/27423263/" target="_blank" rel="noopener">Global BMI Mortality Collaboration, 2016</a></p>
+    <p><strong>Source:</strong> Global BMI Mortality Collaboration, 2016</p>
     <p><strong>Implementation:</strong> js/hrModels.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> BMI 35–39.9 carries HR≈1.94; BMI≥40 reaches HR≈2.76; underweight HR≈1.22 vs BMI 22.5–&lt;25.</p>
     <p><strong>Mitigation:</strong> Maintain a healthy weight through balanced diet and activity.</p>
-    <p><strong>Population:</strong> About 40.3% of adults have obesity <a href="https://www.cdc.gov/nchs/fastats/obesity-overweight.htm" target="_blank" rel="noopener">(CDC)</a>.</p>
+    <p><strong>Population:</strong> About 40.3% of adults have obesity (CDC).</p>
   `,
   alcohol: `
     <h3>Alcohol</h3>
-    <p><strong>Source:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/29676200/" target="_blank" rel="noopener">Wood et al., 2018</a></p>
+    <p><strong>Source:</strong> Wood et al., 2018</p>
     <p><strong>Implementation:</strong> js/hrModels.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Mortality risk rises to HR≈1.40 at six drinks/day; no protective effect assumed.</p>
     <p><strong>Mitigation:</strong> Limit intake or abstain.</p>
-    <p><strong>Population:</strong> About 25.1% report at least one heavy drinking day in the past year <a href="https://www.cdc.gov/nchs/fastats/alcohol.htm" target="_blank" rel="noopener">(CDC)</a>.</p>
+    <p><strong>Population:</strong> About 25.1% report at least one heavy drinking day in the past year (CDC).</p>
   `,
   diet: `
     <h3>Diet</h3>
@@ -75,18 +75,18 @@ export const methodologyInfo = {
   `,
   colorectal_screening: `
     <h3>Colorectal Screening</h3>
-    <p><strong>Source:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/34003219/" target="_blank" rel="noopener">Knudsen et al., 2021</a></p>
+    <p><strong>Source:</strong> Knudsen et al., 2021</p>
     <p><strong>Implementation:</strong> js/screening.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Modeled as life-years gained from screening participation.</p>
     <p><strong>Mitigation:</strong> Follow USPSTF screening guidelines.</p>
   `,
   breast_screening: `
     <h3>Breast Screening</h3>
-    <p><strong>Source:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/26757170/" target="_blank" rel="noopener">USPSTF, 2016</a></p>
+    <p><strong>Source:</strong> USPSTF, 2016</p>
     <p><strong>Implementation:</strong> js/screening.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Modeled as life-years gained from routine mammography.</p>
     <p><strong>Mitigation:</strong> Participate in recommended screening intervals.</p>
-    <p><strong>Population:</strong> 69.1% of women ≥40 had a mammogram within 2 years <a href="https://www.cdc.gov/nchs/fastats/mammography.htm" target="_blank" rel="noopener">(CDC)</a>.</p>
+    <p><strong>Population:</strong> 69.1% of women ≥40 had a mammogram within 2 years (CDC).</p>
   `
 };
 
