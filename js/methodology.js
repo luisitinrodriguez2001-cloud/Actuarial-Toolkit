@@ -3,7 +3,7 @@
 export const methodologyInfo = {
   smoking: `
     <h3>Smoking</h3>
-    <p><strong>Source:</strong> data/hr_smoking.json</p>
+    <p><strong>Source:</strong> <a href="https://www.nejm.org/doi/full/10.1056/NEJMsa1211128" target="_blank" rel="noopener">Jha et al., 2013</a></p>
     <p><strong>Implementation:</strong> js/hrModels.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Current smokers face about twice the mortality risk; quitting gradually lowers risk toward never-smoker levels.</p>
     <p><strong>Mitigation:</strong> Quit smoking and avoid secondhand exposure.</p>
@@ -11,7 +11,7 @@ export const methodologyInfo = {
   `,
   physical_activity: `
     <h3>Physical Activity</h3>
-    <p><strong>Source:</strong> data/hr_physical_activity.json</p>
+    <p><strong>Source:</strong> <a href="https://doi.org/10.1093/aje/kwv148" target="_blank" rel="noopener">Arem et al., 2015</a></p>
     <p><strong>Implementation:</strong> js/hrModels.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Greater MET-hours per week are associated with up to ~30% lower mortality.</p>
     <p><strong>Mitigation:</strong> Engage in regular moderate or vigorous exercise.</p>
@@ -19,7 +19,7 @@ export const methodologyInfo = {
   `,
   bmi: `
     <h3>BMI</h3>
-    <p><strong>Source:</strong> data/hr_bmi.json</p>
+    <p><strong>Source:</strong> <a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1606148" target="_blank" rel="noopener">Global BMI Mortality Collaboration, 2016</a></p>
     <p><strong>Implementation:</strong> js/hrModels.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Both underweight and obesity raise mortality compared with BMI 22.5–&lt;25.</p>
     <p><strong>Mitigation:</strong> Maintain a healthy weight through balanced diet and activity.</p>
@@ -27,7 +27,7 @@ export const methodologyInfo = {
   `,
   alcohol: `
     <h3>Alcohol</h3>
-    <p><strong>Source:</strong> data/hr_alcohol.json</p>
+    <p><strong>Source:</strong> <a href="https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(18)30134-X/fulltext" target="_blank" rel="noopener">Wood et al., 2018</a></p>
     <p><strong>Implementation:</strong> js/hrModels.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Mortality risk increases with daily drinks; no protective effect assumed.</p>
     <p><strong>Mitigation:</strong> Limit intake or abstain.</p>
@@ -75,7 +75,7 @@ export const methodologyInfo = {
   `,
   colorectal_screening: `
     <h3>Colorectal Screening</h3>
-    <p><strong>Source:</strong> data/screening_crc.json</p>
+    <p><strong>Source:</strong> <a href="https://www.uspreventiveservicestaskforce.org/uspstf/document/evidence-report-colorectal-cancer-screening" target="_blank" rel="noopener">USPSTF 2021 Evidence Review</a></p>
     <p><strong>Implementation:</strong> js/screening.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Modeled as life-years gained from screening participation.</p>
     <p><strong>Mitigation:</strong> Follow USPSTF screening guidelines.</p>
@@ -83,7 +83,7 @@ export const methodologyInfo = {
   `,
   breast_screening: `
     <h3>Breast Screening</h3>
-    <p><strong>Source:</strong> data/screening_breast.json</p>
+    <p><strong>Source:</strong> <a href="https://www.uspreventiveservicestaskforce.org/uspstf/document/evidence-report/breast-cancer-screening-2016" target="_blank" rel="noopener">USPSTF 2016 Evidence Review</a></p>
     <p><strong>Implementation:</strong> js/screening.js</p>
     <p><strong>Hazard-Ratio Effect:</strong> Modeled as life-years gained from routine mammography.</p>
     <p><strong>Mitigation:</strong> Participate in recommended screening intervals.</p>
