@@ -28,16 +28,9 @@ function wireUI() {
   // Inputs
   bindNumber('age', v => update({ age: clamp(+v,20,100) }));
   bindSelect('sex', v => update({ sex: v }));
-  const alcoholWrap = document.getElementById('alcohol-wrap');
   bindSelect('smoking', v => {
     document.getElementById('ysq-wrap').hidden = (v !== 'former');
-    alcoholWrap.hidden = (v !== 'current');
-    if (v !== 'current') {
-      document.getElementById('alcohol').value = '0';
-      update({ smoking: v, alcoholDrinks: 0 });
-    } else {
-      update({ smoking: v });
-    }
+    update({ smoking: v });
   });
   bindNumber('yearsSinceQuit', v => update({ yearsSinceQuit: Math.max(0, +v||0) }));
 
@@ -51,12 +44,6 @@ function wireUI() {
   bindNumber('heightFeet', v => update({ heightFt: Math.max(3, +v||3) }), 'heightFt');
   bindNumber('heightInches', v => update({ heightIn: Math.max(0, Math.min(11, +v||0)) }), 'heightIn');
   bindSelect('alcohol', v => update({ alcoholDrinks: Math.max(0, +v||0) }), 'alcoholDrinks');
-
-  alcoholWrap.hidden = (s.smoking !== 'current');
-  if (s.smoking !== 'current') {
-    document.getElementById('alcohol').value = '0';
-    update({ alcoholDrinks: 0 });
-  }
 
   const crcEl = document.getElementById('crc_screen');
   crcEl.value = s.crc ? 'yes' : 'no';
