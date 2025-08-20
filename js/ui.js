@@ -86,7 +86,9 @@ import { setState, getState } from './state.js';
         tip.removeAttribute('style');
       };
       btn.addEventListener('mouseenter', open);
-      btn.addEventListener('focus', open);
+      if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+        btn.addEventListener('focus', open);
+      }
       btn.addEventListener('mouseleave', close);
       btn.addEventListener('blur', close);
       btn.addEventListener('click', ev=>{
