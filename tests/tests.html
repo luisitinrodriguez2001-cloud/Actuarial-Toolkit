@@ -1,5 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
+<base href="..">
 <title>Longevity Lab Tests</title>
 <p>Open console for results.</p>
 <script type="module">
@@ -19,5 +20,13 @@
   const currentSmoker = await run({sex:'M', age:35, smoking:{status:'current'}, metHours:0, bmi:27.5, alcoholDrinks:2, screening:{crc:false,breast:false}, quality:false});
   console.assert(currentSmoker.le_adj < base.le_baseline, 'Smoking reduces LE');
 
+  // survival conditional on current age should start at 1 and death CDF at 0
+  const age = 35;
+  const cond = base.survival.S_base.slice(age).map(v=>v/base.survival.S_base[age]);
+  console.assert(Math.abs(cond[0]-1) < 1e-9, 'Conditional survival starts at 1');
+  const cdfCond = cond.map(v=>1-v);
+  console.assert(Math.abs(cdfCond[0]) < 1e-9, 'Conditional death CDF starts at 0');
+
   console.log('Tests ran. Results:', {base, active, currentSmoker});
+  window.testsDone = true;
 </script>

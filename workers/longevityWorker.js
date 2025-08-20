@@ -5,8 +5,9 @@
 // importScripts; // no-op hint for bundlers (kept for bundlers, safe if undefined)
 
 let life, hrAct, hrBmi, hrSmoke, hrAlc, haleWeights, screening_crc, screening_breast;
+const ctx = typeof self !== 'undefined' ? self : globalThis;
 
-self.onmessage = (e)=>{
+ctx.onmessage = (e)=>{
   const {cmd, payload} = e.data;
   if (cmd==='init'){
     // Datasets are passed in as blobs from dataLoader
@@ -19,11 +20,11 @@ self.onmessage = (e)=>{
     haleWeights = d['hale_weights'] || null;
     screening_crc = d['screening_crc'] || null;
     screening_breast = d['screening_breast'] || null;
-    self.postMessage({ready:true});
+    ctx.postMessage({ready:true});
     return;
   }
   if (cmd==='run'){
-    self.postMessage(runModel(payload));
+    ctx.postMessage(runModel(payload));
   }
 };
 
