@@ -105,6 +105,12 @@ body {
   opacity: 1;
   transform: translateX(-50%) translateY(10px) scale(1);
 }
+/* allow tooltips to remain visible when toggled via JS */
+.icon-btn[data-open] .tooltip{
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(-50%) translateY(10px) scale(1);
+}
 .tooltip-content{
   display:block;
   font-size: .78rem;
