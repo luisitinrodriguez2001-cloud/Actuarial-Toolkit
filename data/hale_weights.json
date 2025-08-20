@@ -4,5 +4,6 @@
   },
   "M": {
     "0": 0.98, "10": 0.97, "20": 0.96, "30": 0.95, "40": 0.92, "50": 0.88, "60": 0.82, "70": 0.74, "80": 0.63, "90": 0.45, "100": 0.28
-  }
+  },
+  "source": "IHME. Global Burden of Disease Study 2019 (HALE). https://ghdx.healthdata.org/record/ihme-data/gbd-2019-health-life-expectancy-1990-2019"
 }
