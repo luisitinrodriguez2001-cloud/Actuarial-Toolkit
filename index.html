@@ -95,20 +95,16 @@
           <fieldset aria-describedby="disclaimer-controls">
             <legend>Profile</legend>
             <label class="inline">Age
-              <button type="button" class="icon-btn" aria-label="Age info">
+              <button type="button" class="icon-btn info-btn" aria-label="Age info">
                 i
-                <span class="tooltip" role="tooltip" id="age-tip">
-                  <span class="tooltip-content">Your current age. Used to look up the baseline mortality rate.</span>
-                </span>
+                <span class="info-tip" role="tooltip" id="age-tip">Your current age. Used to look up the baseline mortality rate.</span>
               </button>
               <input id="age" class="field" type="number" min="20" max="100" inputmode="numeric" placeholder="35" aria-describedby="age-tip" />
             </label>
             <label class="inline">Sex
-              <button type="button" class="icon-btn" aria-label="Sex info">
+              <button type="button" class="icon-btn info-btn" aria-label="Sex info">
                 i
-                <span class="tooltip" role="tooltip" id="sex-tip">
-                  <span class="tooltip-content">Biological sex (female or male). Determines which life table (F or M) to use.</span>
-                </span>
+                <span class="info-tip" role="tooltip" id="sex-tip">Biological sex (female or male). Determines which life table (F or M) to use.</span>
               </button>
               <select id="sex" class="field" aria-describedby="sex-tip">
                 <option value="F">Female</option>
@@ -123,11 +119,9 @@
               <hr class="my-4" />
 
               <label class="inline">Smoking
-                <button type="button" class="icon-btn" aria-label="Smoking info">
+                <button type="button" class="icon-btn info-btn" aria-label="Smoking info">
                   i
-                  <span class="tooltip" role="tooltip" id="smoking-tip">
-                    <span class="tooltip-content">Select ‘Never’ if you’ve never smoked, ‘Current’ if you smoke now, or ‘Former’ if you quit.</span>
-                  </span>
+                  <span class="info-tip" role="tooltip" id="smoking-tip">Select ‘Never’ if you’ve never smoked, ‘Current’ if you smoke now, or ‘Former’ if you quit.</span>
                 </button>
                 <select id="smoking" class="field" aria-describedby="smoking-tip">
                   <option value="never">Never</option>
@@ -137,21 +131,17 @@
               </label>
 
               <label id="ysq-wrap" class="inline" hidden>Years since quit
-                <button type="button" class="icon-btn" aria-label="Years since quit info">
+                <button type="button" class="icon-btn info-btn" aria-label="Years since quit info">
                   i
-                  <span class="tooltip" role="tooltip" id="ysq-tip">
-                    <span class="tooltip-content">If you used to smoke, how many years ago you quit. Reduces your hazard ratio as the years increase.</span>
-                  </span>
+                  <span class="info-tip" role="tooltip" id="ysq-tip">If you used to smoke, how many years ago you quit. Reduces your hazard ratio as the years increase.</span>
                 </button>
                 <input id="yearsSinceQuit" class="field" type="number" min="0" max="60" placeholder="5" aria-describedby="ysq-tip" />
               </label>
 
               <label id="alcohol-wrap" class="inline">Alcohol (drinks/day)
-                <button type="button" class="icon-btn" aria-label="Alcohol info">
+                <button type="button" class="icon-btn info-btn" aria-label="Alcohol info">
                   i
-                  <span class="tooltip" role="tooltip" id="alcohol-tip">
-                    <span class="tooltip-content">Average number of standard drinks you have per day.</span>
-                  </span>
+                  <span class="info-tip" role="tooltip" id="alcohol-tip">Average number of standard drinks you have per day.</span>
                 </button>
                 <select id="alcohol" class="field" aria-describedby="alcohol-tip">
                   <option value="0">None</option>
@@ -167,11 +157,9 @@
               <hr class="my-4" />
 
               <label class="inline">Physical activity
-                <button type="button" class="icon-btn" aria-label="Physical activity info">
+                <button type="button" class="icon-btn info-btn" aria-label="Physical activity info">
                   i
-                  <span class="tooltip" role="tooltip" id="activity-tip">
-                    <span class="tooltip-content">Select your typical weekly activity. We'll estimate MET-hours/week.</span>
-                  </span>
+                  <span class="info-tip" role="tooltip" id="activity-tip">Select your typical weekly activity. We'll estimate MET-hours/week.</span>
                 </button>
                 <select id="activityLevel" class="field" aria-describedby="activity-tip">
                   <option value="none">Little to none</option>
@@ -182,21 +170,17 @@
               </label>
 
               <label class="inline">Weight (lbs)
-                <button type="button" class="icon-btn" aria-label="Weight info">
+                <button type="button" class="icon-btn info-btn" aria-label="Weight info">
                   i
-                <span class="tooltip" role="tooltip" id="weight-tip">
-                  <span class="tooltip-content">Your weight in pounds (lbs). Used to compute Body Mass Index (BMI).</span>
-                </span>
+                <span class="info-tip" role="tooltip" id="weight-tip">Your weight in pounds (lbs). Used to compute Body Mass Index (BMI).</span>
               </button>
               <input id="weight" class="field" type="number" min="50" max="1000" step="0.1" placeholder="160" aria-describedby="weight-tip" />
             </label>
 
               <label class="inline">Height
-                <button type="button" class="icon-btn" aria-label="Height info">
+                <button type="button" class="icon-btn info-btn" aria-label="Height info">
                   i
-                  <span class="tooltip" role="tooltip" id="height-tip">
-                    <span class="tooltip-content">Your height in feet and inches. Also used to compute BMI.</span>
-                  </span>
+                  <span class="info-tip" role="tooltip" id="height-tip">Your height in feet and inches. Also used to compute BMI.</span>
                 </button>
                 <div class="flex items-center gap-2">
                   <input id="heightFeet" class="field w-16" type="number" min="3" max="8" step="1" placeholder="5" aria-label="Height feet" aria-describedby="height-tip" /> <span>ft</span>
@@ -214,11 +198,9 @@
 
           <fieldset id="screening_fs">
             <legend class="inline">Preventive screening
-              <button type="button" class="icon-btn" aria-label="Preventive screening info">
+              <button type="button" class="icon-btn info-btn" aria-label="Preventive screening info">
                 i
-                <span class="tooltip" role="tooltip" id="screening-tip">
-                  <span class="tooltip-content">Adds extra life-years based on USPSTF recommendations.</span>
-                </span>
+                <span class="info-tip" role="tooltip" id="screening-tip">Adds extra life-years based on USPSTF recommendations.</span>
               </button>
             </legend>
             <div id="crc_wrap" hidden>
@@ -248,11 +230,9 @@
           <label class="inline">
             <input id="qualityToggle" type="checkbox" aria-describedby="quality-tip" />
             Show quality-adjusted years
-            <button type="button" class="icon-btn" aria-label="Quality adjusted years info">
+            <button type="button" class="icon-btn info-btn" aria-label="Quality adjusted years info">
               i
-              <span class="tooltip" role="tooltip" id="quality-tip">
-                <span class="tooltip-content">When on, uses healthy life expectancy (HALE) and QALY gains instead of plain life expectancy.</span>
-              </span>
+              <span class="info-tip" role="tooltip" id="quality-tip">When on, uses healthy life expectancy (HALE) and QALY gains instead of plain life expectancy.</span>
             </button>
           </label>
 
@@ -268,11 +248,9 @@
 
         <div id="summary" aria-live="polite">
           <div class="flex justify-end mb-2">
-            <button type="button" class="icon-btn" aria-label="Life expectancy explanations">
+            <button type="button" class="icon-btn info-btn" aria-label="Life expectancy explanations">
               i
-              <span class="tooltip" role="tooltip" id="summary-tip">
-                <span class="tooltip-content">Life expectancy is total expected years. Healthy life expectancy counts only years in good health.</span>
-              </span>
+              <span class="info-tip" role="tooltip" id="summary-tip">Life expectancy is total expected years. Healthy life expectancy counts only years in good health.</span>
             </button>
           </div>
 

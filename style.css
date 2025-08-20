@@ -80,12 +80,13 @@ body {
 }
 .icon-btn:active::after{ opacity:1; transform: scale(1.4); }
 
-/* Tooltip used by <Info> */
-.icon-btn .tooltip{
-  pointer-events: none;
+/* Info button tooltips */
+.info-btn{ position: relative; }
+.info-btn .info-tip{
+  display: none;
   position: absolute;
-  top: 110%; left: 50%;
-  transform: translateX(-50%) translateY(6px) scale(.98);
+  top: 50%;
+  transform: translateY(-50%);
   min-width: 200px;
   max-width: 280px;
   background: white;
@@ -93,35 +94,29 @@ body {
   padding: .6rem .7rem;
   border-radius: .6rem;
   box-shadow: 0 18px 40px rgba(2,6,23,.12);
-  opacity: 0;
-  transition:
-    opacity .18s var(--ease-out),
-    transform .18s var(--ease-out);
   z-index: 40;
 }
-.icon-btn:hover .tooltip,
-.icon-btn:focus .tooltip{
-  pointer-events: auto;
-  opacity: 1;
-  transform: translateX(-50%) translateY(10px) scale(1);
+.info-btn[data-open] .info-tip{ display: block; }
+.info-tip.left{ right: calc(100% + 8px); }
+.info-tip.right{ left: calc(100% + 8px); }
+.info-tip::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  width:12px; height:12px;
+  background:inherit;
+  border:1px solid rgba(15,23,42,.12);
+  transform:translateY(-50%) rotate(45deg);
 }
-/* allow tooltips to remain visible when toggled via JS */
-.icon-btn[data-open] .tooltip{
-  pointer-events: auto;
-  opacity: 1;
-  transform: translateX(-50%) translateY(10px) scale(1);
+.info-tip.left::before{
+  right:-6px;
+  border-left:none;
+  border-bottom:none;
 }
-.tooltip-content{
-  display:block;
-  font-size: .78rem;
-  line-height: 1.05rem;
-  color: rgb(71,85,105);
-  margin-bottom: .35rem;
-}
-.icon-btn .tooltip a{
-  font-size: .78rem;
-  text-decoration: underline;
-  color: rgb(2,132,199);
+.info-tip.right::before{
+  left:-6px;
+  border-right:none;
+  border-top:none;
 }
 
 /* Shimmer / skeleton (fallback if Tailwind animate-pulse not present) */
@@ -168,7 +163,7 @@ section.card { animation: fadeUp .42s var(--ease-out) both; }
   .card,
   .animate-pulse,
   .icon-btn::after,
-  .icon-btn .tooltip{
+  .info-btn .info-tip{
     animation: none !important;
     transition: none !important;
   }

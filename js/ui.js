@@ -2,21 +2,8 @@
 import { setState, getState } from './state.js';
 
 (function(){
-  function positionTooltip(btn){
-    const tip = btn.querySelector('.tooltip');
-    if(!tip) return;
-    const rect = tip.getBoundingClientRect();
-    const vpCenter = window.innerWidth/2;
-    const arrow = Math.max(8, Math.min(rect.width-8, vpCenter - rect.left));
-    tip.style.setProperty('--arrow-left', `${arrow}px`);
-  }
-
-  function closeAll(){
-    document.querySelectorAll('.icon-btn[data-open]').forEach(btn=>{
-      btn.removeAttribute('data-open');
-      const tip = btn.querySelector('.tooltip');
-      if(tip) tip.removeAttribute('style');
-    });
+  function closeTips(){
+    document.querySelectorAll('.info-btn[data-open]').forEach(btn => btn.removeAttribute('data-open'));
   }
 
   document.addEventListener('change', e=>{
@@ -71,41 +58,28 @@ import { setState, getState } from './state.js';
       show(buttons[0].getAttribute('data-tool'));
     }
 
-    // tooltip toggling
-    const icons = document.querySelectorAll('.icon-btn');
-    icons.forEach(btn=>{
-      const tip = btn.querySelector('.tooltip');
+    // info tooltip toggling
+    const infos = document.querySelectorAll('.info-btn');
+    infos.forEach(btn => {
+      const tip = btn.querySelector('.info-tip');
       if(!tip) return;
-      const open = ()=>{
-        closeAll();
-        btn.setAttribute('data-open','');
-        positionTooltip(btn);
-      };
-      const close = ()=>{
-        btn.removeAttribute('data-open');
-        tip.removeAttribute('style');
-      };
-      btn.addEventListener('mouseenter', open);
-      if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
-        btn.addEventListener('focus', open);
-      }
-      btn.addEventListener('mouseleave', close);
-      btn.addEventListener('blur', close);
-      btn.addEventListener('click', ev=>{
+      btn.addEventListener('click', ev => {
         ev.stopPropagation();
-        if(btn.hasAttribute('data-open')) close(); else open();
+        const isOpen = btn.hasAttribute('data-open');
+        closeTips();
+        if(!isOpen){
+          const rect = btn.getBoundingClientRect();
+          const center = window.innerWidth / 2;
+          tip.classList.toggle('right', rect.left < center);
+          tip.classList.toggle('left', rect.left >= center);
+          btn.setAttribute('data-open','');
+        }
       });
     });
 
-    document.addEventListener('click', closeAll);
-    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAll(); });
-
-    const reposition = ()=>{
-      const open = document.querySelector('.icon-btn[data-open]');
-      if(open) positionTooltip(open);
-    };
-    window.addEventListener('scroll', reposition, { passive:true });
-    window.addEventListener('resize', reposition);
+    document.addEventListener('click', closeTips);
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeTips(); });
+    window.addEventListener('resize', closeTips);
 
     // collapsible disclaimers and notes
     document.querySelectorAll('[data-toggle]').forEach(btn=>{
