@@ -7,5 +7,6 @@
     { "years": 15, "HR": 1.05 },
     { "years": 20, "HR": 1.00 }
   ],
-  "never": 1.00
+  "never": 1.00,
+  "source": "Jha P et al. 21st-Century hazards of smoking and benefits of cessation in the United States. N Engl J Med 2013. https://doi.org/10.1056/NEJMsa1211128"
 }
