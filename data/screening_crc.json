@@ -1,6 +1,0 @@
-{
-  "default_schedule": { "startAge": 45, "stopAge": 75, "modality": "mixed" },
-  "LYG_per_1000": 260,
-  "QALY_per_1000": 210,
-  "source": "Knudsen AB et al. Colorectal cancer screening: updated modeling study for the USPSTF. JAMA 2021"
-}
